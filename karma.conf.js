@@ -5,7 +5,7 @@ module.exports = function (config) {
 
     browsers: ['PhantomJS'],
 
-    singleRun: process.env.NODE_ENV === 'production',
+    singleRun: JSON.stringify(process.env.NODE_ENV) === 'production' || JSON.stringify(process.env.TEST) === true,
 
     frameworks: [ 'mocha' ],
 
