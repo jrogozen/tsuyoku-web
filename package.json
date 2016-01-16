@@ -8,7 +8,7 @@
     "build": "rm -rf dist && NODE_ENV=production webpack --progress --verbose --colors --display-error-details --config webpack/webpack.config.prod.js",
     "dev": "NODE_ENV=development node bin/server.js",
     "test": "karma start",
-    "postinstall": "rm -rf dist && NODE_ENV=production node bin/compile.js"
+    "postinstall": "npm run build"
   },
   "author": "jon rogozen",
   "license": "UNLICENSED",
