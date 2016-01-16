@@ -34,9 +34,10 @@
     "redux-simple-router": "^2.0.2",
     "redux-thunk": "^1.0.3",
     "sass-loader": "^3.1.2",
-    "webpack": "^1.12.11"
-  },
-  "devDependencies": {
+    "webpack": "^1.12.11",
+    "stats-webpack-plugin": "^0.3.0",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
     "babel-core": "^6.4.0",
     "babel-loader": "^6.2.1",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -49,9 +50,12 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.4.3",
     "babel-runtime": "^6.3.19",
-    "chai": "^3.4.1",
-    "debug": "^2.2.0",
     "file-loader": "^0.8.5",
+    "raw-loader": "^0.5.1",
+    "debug": "^2.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
     "karma": "^0.13.19",
     "karma-mocha": "^0.2.1",
     "karma-mocha-reporter": "^1.1.5",
@@ -62,14 +66,10 @@
     "nock": "^5.2.1",
     "phantomjs": "^1.9.19",
     "phantomjs-polyfill": "0.0.1",
-    "raw-loader": "^0.5.1",
     "react-addons-test-utils": "^0.14.6",
     "react-transform-catch-errors": "^1.0.1",
     "react-transform-hmr": "^1.0.1",
     "redux-mock-store": "0.0.6",
-    "stats-webpack-plugin": "^0.3.0",
-    "style-loader": "^0.13.0",
-    "url-loader": "^0.5.7",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"
   }
