@@ -1,8 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-console.log(path.join(__dirname, '..', 'app', 'index.js'))
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
