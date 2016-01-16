@@ -32,12 +32,11 @@ function initWebpack() {
     log: console.log,
     path: '/__webpack_hmr'
   }))
-
-  app.use(express.static(__dirname + '/'))
 }
 
 isDev ? initWebpack() : null
 
+app.use(express.static(__dirname + '/'))
 app.get('*', (req, res) => res.sendFile(__dirname + '/index.html'))
 
 const server = http.createServer(app)
