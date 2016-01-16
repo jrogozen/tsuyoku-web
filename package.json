@@ -4,7 +4,7 @@
   "description": "client side react, redux, react-router, express app",
   "main": "index.js",
   "scripts": {
-    "start": "PORT=3000 NODE_ENV=production node bin/server.js",
+    "start": "NODE_ENV=production node bin/server.js",
     "build": "rm -rf dist && NODE_ENV=production webpack --progress --verbose --colors --display-error-details --config webpack/webpack.config.prod.js",
     "dev": "NODE_ENV=development node bin/server.js",
     "test": "karma start --single-run",
