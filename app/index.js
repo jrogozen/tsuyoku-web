@@ -1,24 +1,15 @@
-console.log('hello');
+import React from 'react'
+import { render } from 'react-dom'
+import { syncHistory } from 'redux-simple-router'
+import { createHistory } from 'history'
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
-import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute } from 'react-router';
+import Root from './containers/Root'
+import configureStore from './store/configureStore'
 
-// import configureStore from './store/configureStore';
+const history = createHistory();
+const store = configureStore(undefined, history);
 
-const history = createBrowserHistory();
-// const store = configureStore();
-
-class Temp extends React.Component {
-  render() {
-    return <h1>Hey!</h1>
-  }
-} 
-
-
-ReactDOM.render(
-  <Temp />,
+render(
+  <Root store={store} history={history} />,
   document.getElementById('root')
 );

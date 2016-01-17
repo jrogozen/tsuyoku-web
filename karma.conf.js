@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
 
     browsers: ['PhantomJS'],
@@ -44,6 +44,9 @@ module.exports = function (config) {
         ],
         extensions: ['', '.json', '.js']
       },
+      node: {
+        fs: "empty"
+      },
       plugins: [
         new webpack.IgnorePlugin(/\.json$/),
         new webpack.NoErrorsPlugin(),
@@ -55,7 +58,11 @@ module.exports = function (config) {
 
     webpackServer: {
       noInfo: true
-    }
+    },
+
+    logLevel: config.LOG_INFO,
+
+    browserNoActivityTimeout: 20000
 
   });
 };
