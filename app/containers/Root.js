@@ -5,7 +5,11 @@ import { Provider } from 'react-redux'
 import DevTools from './DevTools'
 import routes from '../routes.js'
 
-const isDev = 'production' !== process.env.NODE_ENV
+let isDev
+
+if (__DEV__) {
+  isDev = 'production' !== process.env.NODE_ENV
+}
 
 export default class Root extends React.Component {
   render() {

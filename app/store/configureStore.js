@@ -5,15 +5,15 @@ import createLogger from 'redux-logger'
 import DevTools from '../containers/DevTools'
 import { syncHistory } from 'redux-simple-router'
 
-const isDev = 'production' !== process.env.NODE_ENV
+let isDev
+
+if (__DEV__) {
+  isDev = 'production' !== process.env.NODE_ENV
+}
 
 export default function configureStore(initialState, history) {
   const router = syncHistory(history)
   const defaultMiddleware = [ createLogger(), thunk, router ]
-
-  // const finalCreateStore = //isDev ?
-    // compose(applyMiddleware(defaultMiddleware), DevTools.instrument())(createStore) :
-    // compose(applyMiddleware(...defaultMiddleware))(createStore)
 
   const finalCreateStore = isDev ?
     compose(
