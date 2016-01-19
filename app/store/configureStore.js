@@ -11,7 +11,7 @@ if (__DEV__) {
   isDev = 'production' !== process.env.NODE_ENV
 }
 
-export default function configureStore(initialState, history) {
+export default function configureStore(history) {
   const router = syncHistory(history)
   const defaultMiddleware = [ createLogger(), thunk, router ]
 
@@ -24,16 +24,16 @@ export default function configureStore(initialState, history) {
       applyMiddleware(...defaultMiddleware)
     )(createStore)
 
-  const store = finalCreateStore(rootReducer, initialState)
+  const store = finalCreateStore(rootReducer)
 
   router.listenForReplays(store)
 
-  if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextReducer = require('../reducers')
-      store.replaceReducer(nextReducer)
-    })
-  }
+  // if (module.hot) {
+  //   module.hot.accept('../reducers', () => {
+  //     const nextReducer = require('../reducers')
+  //     store.replaceReducer(nextReducer)
+  //   })
+  // }
 
   return store
 }

@@ -1,33 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import classnames from 'classnames'
 
-export class Navigation extends React.Component {
+export default class Navigation extends React.Component {
+  getCss() {
+    return {
+      'face': {
+        'material-icons': true,
+        'dark': this.props.user.isAuthenticated
+      }
+    }
+  }
+
   render() {
     const { dispatch, user } = this.props
 
     return (
-      <div className="navigation-component">
-        <Link to="/">
-          Home
-        </Link>
-        <Link to="/login">
-          Login
-        </Link>
-      </div>
+      <nav className="navigation-component">
+        <ul className="right">
+          <li>
+            <Link to='/dashboard'>
+              <i className={classnames(this.getCss().face)}>face</i>
+            </Link>
+          </li>
+        </ul>
+      </nav>
     )
   }
 }
-
-Navigation.propTypes = {
-  user: React.PropTypes.object,
-  dispatch: React.PropTypes.func.isRequired
-}
-
-function mapStateToProps(state) {
-  return {
-    user: state.user
-  }
-}
-
-export default connect(mapStateToProps)(Navigation)

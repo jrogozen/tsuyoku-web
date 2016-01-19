@@ -12,7 +12,7 @@ polyfill();
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-const API_URL = 'https://tsuyoku-web.herokuapp.com/'
+const API_URL = 'https://tsuyoku-api.herokuapp.com/'
 
 describe('User actions', () => {
   it('creates REQUEST_LOGIN action', () => {

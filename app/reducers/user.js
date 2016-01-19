@@ -1,9 +1,11 @@
 import * as userActions from '../actions/user'
+import { base as userBase } from '../models/user'
 
 const initialState = {
   isWaiting: false,
   isAdmin: false,
-  isAuthenticated: false
+  isAuthenticated: false,
+  info: userBase
 }
 
 export default function user(state = initialState, action = {}) {
@@ -19,11 +21,12 @@ export default function user(state = initialState, action = {}) {
       return Object.assign({}, state, {
         isWaiting: false,
         isAuthenticated: !error,
-        isAdmin: payload ? !!payload.admin : false
+        isAdmin: payload ? !!payload.admin : false,
+        info: payload ? Object.assign({}, state.info, payload) : state.info
       })
     case userActions.REQUEST_LOGOUT:
       return initialState
     default:
-      return initialState
+      return state
   }
 }

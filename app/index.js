@@ -7,7 +7,7 @@ import Root from './containers/Root'
 import configureStore from './store/configureStore'
 
 const history = createHistory();
-const store = configureStore(undefined, history);
+const store = configureStore(history);
 
 render(
   <Root store={store} history={history} />,
