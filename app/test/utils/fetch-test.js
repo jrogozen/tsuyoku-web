@@ -5,7 +5,7 @@ import nock from 'nock'
 
 import _fetch from '../../utils/fetch';
 
-const API_URL = 'https://tsuyoku-web.herokuapp.com/'
+const API_URL = 'https://tsuyoku-api.herokuapp.com/'
 
 describe('Fetch util', () => {
   const util = _fetch
@@ -21,10 +21,15 @@ describe('Fetch util', () => {
       .post('/login')
       .reply(200, { success: true })
 
-    util('post', 'login')
+    util(null, null, {
+      method: method,
+      endpoint: 'login'
+    })
       .then((res) => {
-        console.log(res)
+        expect(res.success).to.eq(true)
         done()
       })
   })
+
+  // todo: add test for auth 2nd try
 })
