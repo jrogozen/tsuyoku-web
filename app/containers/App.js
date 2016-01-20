@@ -5,7 +5,7 @@ import Header from '../components/Header'
 
 import * as userActions from '../actions/user'
 
-import { fetch, attemptAuth } from '../utils/fetch'
+import fetch from '../utils/fetch'
 
 class App extends React.Component {
   constructor(props) {
@@ -16,34 +16,14 @@ class App extends React.Component {
     const dispatch = this.props.dispatch
     const self = this
 
-    fetch({
+    fetch(this.props.user, dispatch, {
       method: 'get',
       endpoint: 'users'
     }).then((res) => {
-      if (!res.success && res.error.includes('valid user token')) {
-        attemptAuth(self.props.user, dispatch, { method: 'get', endpoint: 'users' })
-          // .then(() => console.log('woohoo'))
-          // .err((err) => { throw err })
-      }
+      console.log('app.js works', res)
     }).catch((err) => {
-      console.log('api err', err)
+      console.log('app.js failed', err)
     })
-
-    // fetch('get', 'users')
-    //   .then((res) => {
-    //     console.log('res!', res)
-    //   })
-    // if (localStorage.getItem('user')) {
-    //   const userInfo = JSON.parse(localStorage.getItem('user'))
-    //   const apiRefreshToken = userInfo.api_refresh_token
-    //   const userId = userInfo._id
-
-    //   dispatch(userActions.fetchLogin({
-    //     api_refresh_token: apiRefreshToken,
-    //     userId
-    //   }))
-    // }
-
   }
 
   render() {

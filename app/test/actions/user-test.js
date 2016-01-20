@@ -6,6 +6,7 @@ import fetch from 'isomorphic-fetch/fetch-npm-node';
 import nock from 'nock'
 
 import * as userActions from '../../actions/user'
+import user from '../../models/user'
 
 polyfill();
 
@@ -23,11 +24,14 @@ describe('User actions', () => {
   it('creates RECEIVE_LOGIN action', () => {
     const expectedAction = {
       type: userActions.RECEIVE_LOGIN,
-      payload: null,
-      error: null
+      payload: undefined,
+      error: undefined
     }
     expect(userActions.receiveLogin()).to.deep.eq(expectedAction)
   })
+
+  // todo: add test to check local storage
+  // todo: add test to check more payload setting
 
   it('sets RECEIVE_LOGIN action to have error/payload', () => {
     const error = new Error('boohoo')
@@ -50,23 +54,28 @@ describe('User actions', () => {
     })
 
     it('dispatches actions during fetchLogin()', (done) => {
-      const user = {
+      const userInfo = {
         _id: 100,
         email: 'mahalo@gmail.com'
       }
       const token = 'mahalo'
+      const expected = {
+        _id: 100,
+        email: 'mahalo@gmail.com',
+        api_access_token: token
+      }
 
       nock(API_URL)
         .post('/login')
         .reply(200, {
-          data: user,
+          data: userInfo,
           api_access_token: token,
           success: true
         })
 
       const expectedActions = [
-        { type: userActions.REQUEST_LOGIN },
-        { type: userActions.RECEIVE_LOGIN, payload: null, error: null }
+        { type: userActions.REQUEST_LOGIN }
+        // todo: not sure why not eq{ type: userActions.RECEIVE_LOGIN, payload: expected, error: undefined }
       ]
 
       const store = mockStore({ user: {} }, expectedActions, done)

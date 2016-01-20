@@ -8,21 +8,15 @@ export function requestLogin() {
 
 export const RECEIVE_LOGIN = 'RECEIVE_LOGIN'
 export function receiveLogin(err, data) {
-  if (!err) {
-    const userInfoToStore = {
-      _id: data._id,
-      api_access_token: data.api_access_token,
-      email: data.email,
-      updated_at: data.updated_at
-    }
-
+  if (!err && data) {
+    const userInfoToStore = { api_access_token: data.api_access_token }
     localStorage.setItem('user', JSON.stringify(userInfoToStore))
-  }
+  }  
 
   return {
     type: RECEIVE_LOGIN,
     payload: err ? err : data,
-    error: err ? true : null
+    error: err ? true : undefined
   }
 }
 
@@ -36,7 +30,11 @@ export function fetchLogin(credentials) {
   return (dispatch) => {
     dispatch(requestLogin())
 
-    return fetch('post', 'login', credentials)
+    return fetch(null, dispatch, {
+      method: 'post',
+      endpoint: 'login',
+      data: credentials
+    })
       .then(json => {
         if (!json.success) {
           throw json.error

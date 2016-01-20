@@ -18,12 +18,19 @@ export default function user(state = initialState, action = {}) {
         isAuthenticated: false
       })
     case userActions.RECEIVE_LOGIN:
-      return Object.assign({}, state, {
+      const user = Object.assign({}, state, {
         isWaiting: false,
         isAuthenticated: !error,
-        isAdmin: payload ? !!payload.admin : false,
         info: payload ? Object.assign({}, state.info, payload) : state.info
       })
+
+      if (payload && payload.admin === false) {
+        user.isAdmin = false
+      } else if (payload && payload.admin) {
+        user.isAdmin = true
+      }
+
+      return user
     case userActions.REQUEST_LOGOUT:
       return initialState
     default:
