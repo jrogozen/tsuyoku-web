@@ -3,7 +3,6 @@ import { Router } from 'react-router'
 import { Provider } from 'react-redux'
 
 import DevTools from './DevTools'
-import routes from '../routes.js'
 
 let isDev
 
@@ -12,8 +11,14 @@ if (__DEV__) {
 }
 
 export default class Root extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    console.log("RECEIVING PROPS", nextProps, this.props)
+  }
+
   render() {
-    let { store, history } = this.props
+    console.log('ROOT IS RENDERING');
+    const { store, history, routes } = this.props
+    // const routes = configRoutes(store)
 
     return (
       <Provider store={store}>
@@ -29,4 +34,5 @@ export default class Root extends React.Component {
 Root.PropTypes = {
   store: React.PropTypes.object.isRequired,
   history: React.PropTypes.object.isRequired
+  // routes
 }

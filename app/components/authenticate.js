@@ -1,38 +1,41 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { routeActions as route } from 'redux-simple-router'
+// import React, { PropTypes } from 'react'
+// import { connect } from 'react-redux'
+// import { routeActions as route } from 'redux-simple-router'
 
-export function requireAuthentication(Component) {
-  class AuthenticateComponent extends React.Component {
-    constructor(props) {
-      super(props)
-    }
+// // export function requireAuthentication(Component) {
+//   export default class AuthenticateComponent extends React.Component {
+//     constructor(props) {
+//       super(props)
+//     }
 
-    componentWillMount() {
-      const { isAuthenticated, dispatch } = this.props
-      if (!isAuthenticated) {
-        dispatch(route.push('/login'))
-      }
-    }
+//     componentWillMount() {
+//       const { user, dispatch } = this.props
+//       if (!user.isAuthenticated) {
+//         dispatch(route.push('/login'))
+//       }
+//     }
 
-    render() {
-      return (
-        <Component {...this.props} />
-      )
-    }
-  }
+//     render() {
+//         // <Component {...this.props} />
+//       return (
+//         {React.createElement(this.props.children, {
+          
+//         })}
+//       )
+//     }
+//   }
 
-  AuthenticateComponent.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool,
-    location: PropTypes.object
-  }
+//   AuthenticateComponent.propTypes = {
+//     dispatch: PropTypes.func.isRequired,
+//     isAuthenticated: PropTypes.bool,
+//     location: PropTypes.object
+//   }
 
-  function mapStateToProps(state) {
-    return {
-      isAuthenticated: state.user.isAuthenticated
-    }
-  }
+//   // function mapStateToProps(state) {
+//   //   return {
+//   //     isAuthenticated: state.user.isAuthenticated
+//   //   }
+//   // }
 
-  return connect(mapStateToProps)(AuthenticateComponent)
-}
+//   // export default connect(mapStateToProps)(AuthenticateComponent)
+// // }

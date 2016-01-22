@@ -5,6 +5,8 @@ import { polyfill } from 'es6-promise';
 import fetch from 'isomorphic-fetch/fetch-npm-node';
 import nock from 'nock'
 
+import { mockLocalStorage } from '../utils'
+
 import * as userActions from '../../actions/user'
 import user from '../../models/user'
 
@@ -16,6 +18,11 @@ const mockStore = configureMockStore(middlewares)
 const API_URL = 'https://tsuyoku-api.herokuapp.com/'
 
 describe('User actions', () => {
+
+  before(() => {
+    mockLocalStorage()
+  })
+
   it('creates REQUEST_LOGIN action', () => {
     const expectedAction = { type: userActions.REQUEST_LOGIN }
     expect(userActions.requestLogin()).to.deep.eq(expectedAction)
@@ -30,8 +37,11 @@ describe('User actions', () => {
     expect(userActions.receiveLogin()).to.deep.eq(expectedAction)
   })
 
-  // todo: add test to check local storage
-  // todo: add test to check more payload setting
+  it('sets localStorage after receiveLogin', () => {
+    const data = { api_access_token: 'mahalo', email: 'mahalo@gmail.com' }
+    userActions.receiveLogin(null, data)
+    expect(JSON.parse(window.localStorage.getItem('user')).api_access_token).to.eq('mahalo')
+  })
 
   it('sets RECEIVE_LOGIN action to have error/payload', () => {
     const error = new Error('boohoo')

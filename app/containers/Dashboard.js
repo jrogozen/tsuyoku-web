@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React from 'react'
-import { routeActions } from 'redux-simple-router'
+import { Link } from 'react-router'
 
 import * as userActions from '../actions/user'
 
@@ -14,6 +14,10 @@ export default class Dashboard extends React.Component {
         <div className="row">
           <div className="col s12">
             <h1>Dashboard</h1>
+            <h2>User Widgets</h2>
+            <ul>
+              <li><Link to="/workouts">Workouts</Link></li>
+            </ul>
             <h2>User Info</h2>
             <ul>
               <li>email: {user.info.email}</li>

@@ -3,6 +3,8 @@ import { polyfill } from 'es6-promise';
 import fetch from 'isomorphic-fetch/fetch-npm-node';
 import nock from 'nock'
 
+import { mockLocalStorage } from '../utils'
+
 import _fetch from '../../utils/fetch';
 
 const API_URL = 'https://tsuyoku-api.herokuapp.com/'
@@ -10,11 +12,15 @@ const API_URL = 'https://tsuyoku-api.herokuapp.com/'
 describe('Fetch util', () => {
   const util = _fetch
 
+  before(() => {
+    mockLocalStorage()
+  })
+
   afterEach(() => {
     nock.cleanAll()
   })
 
-  it('should make api calls with the correct method', (done) => {
+  it('make api calls with the correct method', (done) => {
     const method = 'post'
 
     nock(API_URL)
@@ -30,6 +36,6 @@ describe('Fetch util', () => {
         done()
       })
   })
-
+  
   // todo: add test for auth 2nd try
 })
