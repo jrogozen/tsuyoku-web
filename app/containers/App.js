@@ -14,25 +14,22 @@ class App extends React.Component {
 
   componentWillMount() {
     const dispatch = this.props.dispatch
-    const self = this
+    const storedUser = localStorage.getItem('user')
 
-    // todo: api should accept access_token for login (auth)
-    // attempt login with localStorage here
-    // const storedUser = localStorage.getItem('user')
+    if (localStorage.getItem('user')) {
+      let accessToken
 
-    // if (localStorage.getItem('user')) {
-    //   let accessToken
-    //   try {
-    //     accessToken = JSON.parse(storedUser).api_access_token
-    //   } catch(err) {
-    //     accessToken = null
-    //   }
+      try {
+        accessToken = JSON.parse(storedUser).api_access_token
+      } catch(err) {
+        accessToken = null
+      }
 
-    //   if (accessToken) {
-    //     dispatch(userActions.fetchLogin({api_access_token: accessToken}))
-    //   }
+      if (accessToken) {
+        dispatch(userActions.fetchLogin())
+      }
 
-    // }
+    }
   }
 
   render() {

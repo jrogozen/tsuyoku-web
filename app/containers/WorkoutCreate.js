@@ -111,6 +111,12 @@ export default class WorkoutCreate extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (_.size(this.props.workouts.data) !== _.size(nextProps.workouts.data)) {
+      this.setState({ baseWorkout: getBaseWorkout(nextProps.workouts) })
+    }
+  }
+
   render() {
     const { user, workouts, dispatch } = this.props
     const guide = workouts.currentGuide
