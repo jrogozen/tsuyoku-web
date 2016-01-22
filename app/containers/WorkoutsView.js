@@ -22,7 +22,7 @@ export default class WorkoutsView extends React.Component {
                   return (
                     <li key={`${lift.name}-${i}`}>
                       <div>
-                      <h3>{lift.name}</h3>
+                      <h3>{lift.name} - Set: {i + 1}</h3>
                         {lift.weight.map((val, i) => {
                           weightCount += val
                           return (
