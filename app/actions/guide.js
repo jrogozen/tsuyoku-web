@@ -14,7 +14,7 @@ export function receiveGuide(err, data) {
   }
 }
 
-export function fetchGuide(options) {
+export function fetchGuide(options = {}) {
   return (dispatch) => {
     const { user, routine, maxes } = options
     const data = {
@@ -23,7 +23,7 @@ export function fetchGuide(options) {
       userId: user.info._id
     }
 
-    dispatch(requestWorkout())
+    dispatch(requestGuide())
 
     return fetch(user, dispatch, {
       method: 'put',
