@@ -1,24 +1,19 @@
-import { expect } from 'chai'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-import { polyfill } from 'es6-promise';
-import fetch from 'isomorphic-fetch/fetch-npm-node';
-import nock from 'nock'
-
-import { mockLocalStorage } from '../utils'
-
-import * as userActions from '../../actions/user'
-import user from '../../models/user'
-
-polyfill();
+import {
+  expect,
+  configureMockStore,
+  thunk,
+  fetch,
+  nock,
+  mockLocalStorage,
+  userActions,
+  user,
+  API_URL
+} from '../utils'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-const API_URL = 'https://tsuyoku-api.herokuapp.com/'
-
 describe('User actions', () => {
-
   before(() => {
     mockLocalStorage()
   })
@@ -84,10 +79,11 @@ describe('User actions', () => {
         })
 
       const expectedActions = [
-        { type: userActions.REQUEST_LOGIN }
-        // todo: not sure why not eq{ type: userActions.RECEIVE_LOGIN, payload: expected, error: undefined }
+        { type: userActions.REQUEST_LOGIN },
+        { type: userActions.RECEIVE_LOGIN, payload: expected, error: undefined }
       ]
 
+      console.log(expected)
       const store = mockStore({ user: {} }, expectedActions, done)
       store.dispatch(userActions.fetchLogin())
     })

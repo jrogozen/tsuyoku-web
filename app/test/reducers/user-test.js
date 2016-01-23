@@ -1,6 +1,6 @@
-import { expect } from 'chai'
+import { expect, userActions } from '../utils'
+
 import reducer from '../../reducers/user'
-import * as userActions from '../../actions/user'
 import { base as userBase } from '../../models/user'
 
 const initialState = {

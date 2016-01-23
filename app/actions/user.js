@@ -7,11 +7,14 @@ export function requestLogin() {
 }
 
 export const RECEIVE_LOGIN = 'RECEIVE_LOGIN'
-export function receiveLogin(err, data) {
-  if (!err && data) {
+export function receiveLogin(err, _data) {
+  let data
+
+  if (!err && _data) {
+    data = Object.assign({}, _data)
     const userInfoToStore = { api_access_token: data.api_access_token }
     localStorage.setItem('user', JSON.stringify(userInfoToStore))
-  }  
+  }
 
   return {
     type: RECEIVE_LOGIN,

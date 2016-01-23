@@ -1,6 +1,6 @@
-import { expect } from 'chai'
+import { expect, workoutActions } from '../utils'
+
 import reducer from '../../reducers/workouts'
-import * as workoutActions from '../../actions/workout'
 
 const initialState = {
   isWaiting: false,
