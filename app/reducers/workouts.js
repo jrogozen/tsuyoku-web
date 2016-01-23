@@ -2,16 +2,6 @@ import * as workoutActions from '../actions/workout'
 
 const initialState = {
   isWaiting: false,
-  currentGuide: {
-    routine: {
-      name: null,
-      week: null,
-      options: {
-        accessory: null
-      },
-      maxes: {}
-    }
-  },
   data: {}
 }
 
@@ -27,11 +17,6 @@ export default function workouts(state = initialState, action = {}) {
       return Object.assign({}, state, {
         isWaiting: false,
         data: error ? state.data : Object.assign({}, state.data, payload)
-      })
-    case workoutActions.RECEIVE_GUIDE:
-      return Object.assign({}, state, {
-        isWaiting: false,
-        currentGuide: error ? Object.assign({}, initialState.currentGuide) : payload
       })
     default:
       return state

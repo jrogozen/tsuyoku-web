@@ -83,7 +83,6 @@ describe('User actions', () => {
         { type: userActions.RECEIVE_LOGIN, payload: expected, error: undefined }
       ]
 
-      console.log(expected)
       const store = mockStore({ user: {} }, expectedActions, done)
       store.dispatch(userActions.fetchLogin())
     })

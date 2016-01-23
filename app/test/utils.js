@@ -7,6 +7,7 @@ import nock from 'nock'
 
 import * as userActions from '../actions/user'
 import * as workoutActions from '../actions/workout'
+import * as guideActions from '../actions/guide'
 import user from '../models/user'
 
 polyfill()
@@ -51,6 +52,7 @@ export {
   nock,
   userActions,
   workoutActions,
+  guideActions,
   user,
   mockLocalStorage,
   API_URL

@@ -1,10 +1,5 @@
 import fetch from '../utils/fetch'
 
-export const REQUEST_WORKOUTS = 'REQUEST_WORKOUTS'
-export function requestWorkouts() {
-  return { type: REQUEST_WORKOUTS }
-}
-
 export const REQUEST_WORKOUT = 'REQUEST_WORKOUT'
 export function requestWorkout() {
   return { type: REQUEST_WORKOUT }
@@ -27,11 +22,10 @@ export function receiveWorkout(err, data) {
   return {
     type: RECEIVE_WORKOUT,
     payload: err ? err : workoutObj,
-    error: err ? err : undefined
+    error: err ? true : undefined
   }
 }
 
-export const RECEIVE_WORKOUTS = 'RECEIVE_WORKOUTS'
 export function receiveWorkouts(err, data) {
   let workoutObj = {}
 
@@ -48,64 +42,53 @@ export function receiveWorkouts(err, data) {
   return {
     type: RECEIVE_WORKOUT,
     payload: err ? err : workoutObj,
-    error: err ? err : undefined
+    error: err ? true : undefined
   }
 }
 
-export const RECEIVE_GUIDE = 'RECEIVE_GUIDE'
-export function receiveGuide(err, data) {
-  return {
-    type: RECEIVE_GUIDE,
-    payload: err ? err : data,
-    error: err ? err : undefined
-  }
-}
+// export const RECEIVE_GUIDE = 'RECEIVE_GUIDE'
+// export function receiveGuide(err, data) {
+//   return {
+//     type: RECEIVE_GUIDE,
+//     payload: err ? err : data,
+//     error: err ? true : undefined
+//   }
+// }
 
-export function fetchGuide(options) {
+// export function fetchGuide(options) {
+//   return (dispatch) => {
+//     const { user, routine, maxes } = options
+//     const data = {
+//       routine,
+//       maxes,
+//       userId: user.info._id
+//     }
+
+//     dispatch(requestWorkout())
+
+//     return fetch(user, dispatch, {
+//       method: 'put',
+//       endpoint: 'guides',
+//       data: data
+//     }).then((json) => {
+//       if (!json.success) {
+//         throw json.error
+//       }
+
+//       dispatch(receiveGuide(null, json.data))
+//     }).catch(err => dispatch(receiveGuide(err)))
+//   }
+// }
+
+export function saveWorkout(options = {}) {
   return (dispatch) => {
-    const { user, routine, maxes } = options
-    const data = {
-      routine,
-      maxes,
-      userId: user.info._id
-    }
-
-    dispatch(requestWorkout())
-
-    return fetch(user, dispatch, {
-      method: 'put',
-      endpoint: 'guides',
-      data: data
-    }).then((json) => {
-      if (!json.success) {
-        throw json.error
-      }
-
-      dispatch(receiveGuide(null, json.data))
-    }).catch(err => dispatch(receiveGuide(err)))
-
-    // userId, routine, maxes
-    /* routine: {
-      name: '',
-      options: {
-        accessory: ''
-      }
-    },
-    maxes: {
-      'bench press': 255
-    }
-    */
-  }
-}
-
-export function saveWorkout(options) {
-  return (dispatch) => {
-    const user = options.user
-    const workout = options.workout
+    const user = options.user || {}
+    const userInfo = user.info || {}
+    const workout = options.workout || {}
     const data = {
       lifts: workout.lifts,
       routine: workout.routine,
-      userId: user.info._id
+      userId: userInfo._id
     }
 
     dispatch(requestWorkout())
@@ -124,10 +107,11 @@ export function saveWorkout(options) {
   }
 }
 
-export function fetchWorkouts(options) {
+export function fetchWorkouts(options = {}) {
   return (dispatch) => {
-    const user = options.user
-    const baseEndpoint = `workouts/byUser?userId=${user.info._id}&routineName=${options.routineName}`
+    const user = options.user || {}
+    const userInfo = user.info || {}
+    const baseEndpoint = `workouts/byUser?userId=${userInfo._id}&routineName=${options.routineName}`
 
     let endpoint
 

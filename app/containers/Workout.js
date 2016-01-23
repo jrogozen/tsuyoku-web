@@ -23,10 +23,6 @@ export default class Workout extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('hi')
-  }
-
   render() {
     const { user, dispatch, workouts } = this.props
 

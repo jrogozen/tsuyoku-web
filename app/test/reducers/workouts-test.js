@@ -4,23 +4,13 @@ import reducer from '../../reducers/workouts'
 
 const initialState = {
   isWaiting: false,
-  currentGuide: {
-    routine: {
-      name: null,
-      week: null,
-      options: {
-        accessory: null
-      },
-      maxes: {}
-    }
-  },
   data: {}
 }
 const workoutBase = { lifts: 100, weight: 'a ton' }
 
 describe('Workouts reducer', () => {
   it('returns the initial state', () => {
-    expect(reducer()).to.deep.eq(initialState)
+    expect(reducer(undefined)).to.deep.eq(initialState)
   })
 
   it('sets state for REQUEST_WORKOUT', () => {
