@@ -11,14 +11,8 @@ if (__DEV__) {
 }
 
 export default class Root extends React.Component {
-  componentWillReceiveProps(nextProps) {
-    console.log("RECEIVING PROPS", nextProps, this.props)
-  }
-
   render() {
-    console.log('ROOT IS RENDERING');
     const { store, history, routes } = this.props
-    // const routes = configRoutes(store)
 
     return (
       <Provider store={store}>
@@ -34,5 +28,4 @@ export default class Root extends React.Component {
 Root.PropTypes = {
   store: React.PropTypes.object.isRequired,
   history: React.PropTypes.object.isRequired
-  // routes
 }

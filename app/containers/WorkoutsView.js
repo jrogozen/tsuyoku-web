@@ -4,7 +4,8 @@ import _ from 'lodash'
 export default class WorkoutsView extends React.Component {
   render() {
     const { dispatch, user, workouts } = this.props
-    const workoutData = workouts.data
+    const workoutData = _.sortBy(workouts.data, (workout) => -workout.created_at)
+
     return (
       <div className="workouts-view-component">
         <h2>Workouts View</h2>

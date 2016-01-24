@@ -1,75 +1,23 @@
 import React from 'react'
 
 import * as workoutActions from '../actions/workout'
+import * as guideActions from '../actions/guide'
 import * as userActions from '../actions/user'
-
-const createWorkout = function createWorkout() {
-  return {
-    // routine: createRoutine(),
-    // lifts: createLifts()
-  }
-}
-
-const shouldIncWeek = function shouldIncWeek(baseLift) {
-  const lastLift = 'squat'
-
-  if (baseLift === lastLift) {
-    return true
-  }
-  return false
-}
-
-const getBaseWorkout = function getBaseWorkout(workouts = {}) {
-  const data = workouts.data
-
-  if (_.isEmpty(data)) {
-    return {
-      routine: {
-        name: '5/3/1',
-        week: 1,
-        options: {
-          accessory: 'boring but big'
-        }
-      },
-      lifts: [{}]
-    }
-  }
-
-  return _.sortBy(data, (workout) => -workout.created_at)[0]
-}
-
-const getNextLift = function getNextLift(prevLift) {
-  if (!prevLift) {
-    return 'press'
-  }
-
-  const liftDict = ['press', 'deadlift', 'bench press', 'squat']
-  const index = liftDict.indexOf(prevLift)
-
-  if (index === liftDict.length -1) {
-    return liftDict[0]
-  } else {
-    return liftDict[index + 1]
-  }
-}
+import { shouldIncrementWeek, getNextLift } from '../utils/fiveThreeOne'
 
 export default class WorkoutCreate extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      baseWorkout: getBaseWorkout(this.props.workouts)
-    }
-
     this.handleClick = (e) => {
       const { user, dispatch } = this.props
-      const baseWorkout = this.state.baseWorkout
+      const baseWorkout = this.props.baseWorkout
       const lift = getNextLift(baseWorkout.lifts[0].name)
       const options = {
         user: user,
         routine: {
           name: baseWorkout.routine.name,
-          week: shouldIncWeek(lift) ?
+          week: lift === 'squat' ?
             baseWorkout.routine.week + 1 : baseWorkout.routine.week,
           options: {
             accessory: 'boring but big'
@@ -80,18 +28,18 @@ export default class WorkoutCreate extends React.Component {
 
       options.maxes[lift] = user.info.maxes[lift] || 135
 
-      dispatch(workoutActions.fetchGuide(options))
+      dispatch(guideActions.fetchGuide(options))
     }
 
     this.handleWorkoutSaveClick = (e) => {
-      const { user, dispatch, workouts } = this.props
-      const liftName = _.keys(workouts.currentGuide.lifts)[0]
+      const { user, dispatch, guide, workouts } = this.props
+      const liftName = _.keys(guide.lifts)[0]
       const options = {
         user,
         workout: {
-          routine: workouts.currentGuide.routine,
+          routine: guide.routine,
           lifts: 
-            workouts.currentGuide.lifts[liftName].sets.map((set) => {
+            guide.lifts[liftName].sets.map((set) => {
               return {
                 name: liftName,
                 weight: set
@@ -111,27 +59,20 @@ export default class WorkoutCreate extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (_.size(this.props.workouts.data) !== _.size(nextProps.workouts.data)) {
-      this.setState({ baseWorkout: getBaseWorkout(nextProps.workouts) })
-    }
-  }
-
   render() {
-    const { user, workouts, dispatch } = this.props
-    const guide = workouts.currentGuide
+    const { user, workouts, guide, dispatch } = this.props
 
     return (
       <div className="workout-create-container">
-        <button disabled={workouts.isWaiting} onClick={this.handleClick}>
+        <button disabled={guide.isWaiting} onClick={this.handleClick}>
           Generate Guide
         </button>
-        <button disabled={workouts.isWaiting || !workouts.currentGuide} onClick={this.handleWorkoutSaveClick}>
+        <button disabled={guide.isWaiting} onClick={this.handleWorkoutSaveClick}>
           Save Workout
         </button>
 
         <h2>Guide</h2>
-        {workouts.isWaiting || !workouts.currentGuide ?
+        {guide.isWaiting ?
           <span>Generating...</span> :
           <div>
             <h3>{guide.routine.name} - {guide.routine.options.accessory}</h3>

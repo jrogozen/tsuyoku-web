@@ -6,25 +6,24 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import * as workoutActions from '../actions/workout'
+import { getBaseWorkout } from '../utils/fiveThreeOne'
 
 import WorkoutNavigation from '../components/WorkoutNavigation'
 
 export default class Workout extends React.Component {
   componentWillMount() {
-    const { dispatch, user, workouts } = this.props
+    const { dispatch, user, guide, workouts } = this.props
 
-    if (user.isAuthenticated) {
-      const options = {
-        user,
-        routineName: '5/3/1'
-      }
-
-      dispatch(workoutActions.fetchWorkouts(options))
+    const options = {
+      user,
+      routineName: '5/3/1'
     }
+
+    dispatch(workoutActions.fetchWorkouts(options))
   }
 
   render() {
-    const { user, dispatch, workouts } = this.props
+    const { user, guide, dispatch, workouts } = this.props
 
     return (
       <div className="workout-container">
@@ -33,6 +32,8 @@ export default class Workout extends React.Component {
 
         {React.cloneElement(this.props.children, {
           user: user,
+          guide: guide,
+          baseWorkout: getBaseWorkout(workouts),
           workouts: workouts,
           dispatch: dispatch
         })}

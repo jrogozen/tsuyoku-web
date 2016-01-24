@@ -38,6 +38,7 @@ class App extends React.Component {
         <Header />
         {React.cloneElement(this.props.children, {
           user: this.props.user,
+          guide: this.props.guide,
           workouts: this.props.workouts,
           dispatch: this.props.dispatch
         })}
@@ -49,7 +50,8 @@ class App extends React.Component {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    workouts: state.workouts
+    workouts: state.workouts,
+    guide: state.guide
   }
 }
 
