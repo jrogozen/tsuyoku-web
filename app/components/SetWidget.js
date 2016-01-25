@@ -12,8 +12,8 @@ export default class SetWidget extends React.Component {
 
     return (
       <li className="set-widget-component">
-        <div className="weight">{weight} * </div>
-        <div className="reps">{reps}</div>
+        <span className="weight">{weight} x </span>
+        <span className="reps">{reps}</span>
       </li>
     )
   }

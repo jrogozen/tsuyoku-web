@@ -18,7 +18,6 @@ export default class WorkoutForm extends React.Component {
   render() {
     const  { guide, user, saveWorkout } = this.props
     const currentDate = new Date()
-
     return (
       <div className="workout-form-component">
         <WorkoutTimer routine={guide.routine} workout={guide.lifts} />
@@ -36,16 +35,14 @@ export default class WorkoutForm extends React.Component {
 
         {_.map(guide.lifts, (lift, liftName) => {
           return (
-            <div>
+            <div key={liftName}>
               <LiftWidget title="Warmup" sets={lift.warmup}/>
               <LiftWidget title="Workout" sets={lift.sets}/>
             </div>
           )
         })}
 
-        <button onClick={this.props.saveWorkout}>
-          Finish Workout
-        </button>
+        <button onClick={this.props.saveWorkout}>Finish Workout</button>
       </div>
     )
   }
