@@ -13,7 +13,6 @@ import WorkoutNavigation from '../components/WorkoutNavigation'
 export default class Workout extends React.Component {
   componentWillMount() {
     const { dispatch, user, guide, workouts } = this.props
-
     const options = {
       user,
       routineName: '5/3/1'
