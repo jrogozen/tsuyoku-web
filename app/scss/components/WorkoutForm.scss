@@ -1,0 +1,63 @@
+@import '../imports.scss';
+
+.workout-form-component {
+  .workout-title-bar {
+    float: left;
+    width: 100%;
+    background: $warning;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-bottom: 2px solid $light-grey;
+    border-top: 2px solid $light-grey;
+    font-weight: bold;
+    border-radius: 4px;
+    .left {
+      float: left;
+    }
+    .right {
+      float: right;
+    }
+    .user-weight {
+      font-weight: bold;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .lift-widget-title {
+    margin: 20px 0;
+    float: left;
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid $grey;
+    border-top: 2px solid $grey;
+    padding: 10px;
+    color: black;
+    font-size: 14px;
+  }
+  .button-group {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin: 40px 0;
+  }
+  button {
+    transition: all 0.25s;
+    margin: 20px 0;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-weight: bold;
+  }
+  .finish {
+    width: 100%;
+    background: white;
+    border: 2px solid $alert;
+    color: $alert;
+    &:hover {
+      background: $alert;
+      color: white;
+    }
+  }
+}

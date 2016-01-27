@@ -8,8 +8,8 @@ li.set-widget-component {
   margin: 5px 1.5%;
   padding: 10px;
   .outer-circle {
+    margin: 0 auto;
     background: $grey;
-    // border: 2px solid $grey;
     height: 80px;
     width: 80px;
     position: relative;
@@ -39,6 +39,13 @@ li.set-widget-component {
   }
   &.workout, &.warmup {
     width: 30%;
+  }
+  &.five-col {
+    width: 30%;
+    @include breakpoint(md-and-up) {
+      width: 19%;
+      margin: 5px 0.5%;
+    }
   }
   &.active {
     cursor: pointer;

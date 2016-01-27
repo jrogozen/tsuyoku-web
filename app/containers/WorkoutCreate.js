@@ -37,7 +37,6 @@ export default class WorkoutCreate extends React.Component {
 
     return (
       <div className="workout-create-container">
-        <h2>Guide</h2>
         {guide.isWaiting ?
           <span>Generating...</span> : null
         }

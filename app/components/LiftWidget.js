@@ -17,7 +17,7 @@ export default class LiftWidget extends React.Component {
 
     return (
       <div className="lift-widget-component widget">
-        <div className="title">{capitalize(title)}</div>
+        {title ? <div className="title">{capitalize(title)}</div> : null}
         <div>
           <ul>
             {sets.map((set, i) => {

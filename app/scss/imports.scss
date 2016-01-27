@@ -5,3 +5,37 @@ $light-grey: #F5F5F5;
 $alert: #ED6041;
 $warning: #FFC800;
 $success: #47C7B5;
+
+
+/* breakpoints */
+$screen-sm-min: 320px;
+$screen-sm-max: 767px;
+$screen-md-min: 768px;
+$screen-md-max: 991px;
+$screen-lg-min: 992px;
+$screen-lg-max: 1199px;
+$screen-xl-min: 1200px;
+
+@mixin breakpoint($size) {
+    @if ($size==sm-and-up) {
+        @content;
+    }
+    @else if ($size==md-and-up) {
+        @media (min-width: $screen-md-min) {
+            @content;
+        }
+    }
+    @else if ($size==lg-and-up) {
+        @media (min-width: $screen-lg-min) {
+            @content;
+        }
+    }
+    @else if ($size==xl-and-up) {
+        @media (min-width: $screen-xl-min) {
+            @content;
+        }
+    }
+    @else {
+        @warn "Breakpoint mixin supports: sm-and-up, md-and-up, lg-and-up, xl-and-up";
+    }
+}

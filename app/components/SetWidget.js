@@ -57,11 +57,13 @@ export default class SetWidget extends React.Component {
       'set-widget-component': true,
       'workout': this.props.lift.type === 'sets',
       'warmup': this.props.lift.type === 'warmup',
+      'five-col': (this.props.lift.type !== 'sets' && this.props.lift.type !== 'warmup'), // not sure why equality doesn't work
       'active': this.state.enabled
     })
   }
 
   render() {
+    console.log(this.props.lift.title)
     const weight = this.state.initialSet[0]
     const reps = this.state.set.length
 

@@ -13,9 +13,12 @@ import React from 'react'
 
 import { getDate } from '../utils/time'
 import * as workoutActions from '../actions/workout'
+import { routeActions } from 'redux-simple-router'
 
 import WorkoutTimer from './WorkoutTimer'
 import LiftWidget from './LiftWidget'
+
+const stylesheet = require('../scss/components/WorkoutForm.scss')
 
 export default class WorkoutForm extends React.Component {
   constructor(props) {
@@ -84,12 +87,12 @@ export default class WorkoutForm extends React.Component {
       <div className="workout-form-component">
         <WorkoutTimer display={'info'} routine={guide.routine} workout={guide.lifts} />
 
-        <div>
+        <div className="workout-title-bar">
           <div className="left">
             {getDate()}
           </div>
           <div className="right">
-            {user.info.weight ? user.info.weight : '--'} lb
+            <span className="user-weight" onClick={dispatch.bind(null, routeActions.push('/dashboard'))}>{user.info.weight ? user.info.weight : '--'} lb</span>
           </div>
         </div>
 
@@ -100,19 +103,19 @@ export default class WorkoutForm extends React.Component {
 
           return (
             <div key={liftName}>
+              <div className="lift-widget-title">Warmup</div>
               <LiftWidget
                 lift={{
                   type: 'warmup',
-                  title: 'Warmup',
                   sets: lift.warmup,
                   liftName: liftName
                 }}
                 updateGuideState={this.updateGuideState}
               />
+              <div className="lift-widget-title">Workout</div>
               <LiftWidget
                 lift={{
                   type: 'sets',
-                  title: 'Workout',
                   sets: lift.sets,
                   liftName: liftName
                 }}
@@ -120,12 +123,12 @@ export default class WorkoutForm extends React.Component {
               />
               {hasAccessoryLifts ?
                 <div>
-                  <div>Accessory</div>
+                  <div className="lift-widget-title">Accessory</div>
                   {_.map(lift.accessoryLifts, (accessoryLift, accessoryLiftName) => {
                     return (
                       <LiftWidget
                         lift={{
-                          type: 'sets',
+                          type: 'accessory',
                           title: accessoryLiftName,
                           sets: accessoryLift.sets,
                           liftName: liftName
@@ -139,8 +142,10 @@ export default class WorkoutForm extends React.Component {
             </div>
           )
         })}
-
-        <button onClick={this.handleClick}>Finish Workout</button>
+        
+        <div className="button-group">
+          <button className="finish" onClick={this.handleClick}>Finish Workout</button>
+        </div>
       </div>
     )
   }
