@@ -22,7 +22,7 @@ module.exports = {
     })
   ],
   resolve: {
-    root: path.join(__dirname, '..'),
+    root: path.resolve(__dirname, '..'),
     extensions: ['', '.js']
   },
   module: {
@@ -38,8 +38,8 @@ module.exports = {
         loader: 'json'
       },
       {
-        test: /\.css$/,
-        loaders: ['style', 'raw'],
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader',
         include: path.join(__dirname, '..')
       },
       {

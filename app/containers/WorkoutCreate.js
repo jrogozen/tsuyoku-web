@@ -7,38 +7,9 @@ import * as guideActions from '../actions/guide'
 import * as userActions from '../actions/user'
 import { shouldIncrementWeek, getNextLift } from '../utils/fiveThreeOne'
 
+var stylesheet = require('../scss/containers/WorkoutCreate.scss')
+
 export default class WorkoutCreate extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.handleWorkoutSaveClick = (e) => {
-      const { user, dispatch, guide, workouts } = this.props
-      const liftName = _.keys(guide.lifts)[0]
-      const options = {
-        user,
-        workout: {
-          routine: guide.routine,
-          lifts: 
-            guide.lifts[liftName].sets.map((set) => {
-              return {
-                name: liftName,
-                weight: set
-              }
-            })
-          
-        }
-      }
-
-      dispatch(workoutActions.saveWorkout(options))
-
-      // todo: update user maxes if week 3!
-
-      // if (week % 3 === 0) {
-        // dispatch(userActions)
-      // }
-    }
-  }
-
   componentWillMount() {
     const { user, dispatch } = this.props
     const baseWorkout = this.props.baseWorkout
@@ -72,9 +43,9 @@ export default class WorkoutCreate extends React.Component {
         }
         {_.size(guide.lifts) > 0 ?
           <WorkoutForm
+            dispatch={dispatch}
             guide={guide}
             user={user}
-            saveWorkout={this.handleWorkoutSaveClick}
           /> : null
         }
       </div>

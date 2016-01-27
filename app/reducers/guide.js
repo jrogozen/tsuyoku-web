@@ -26,6 +26,12 @@ export default function workouts(state = initialState, action = {}) {
         routine: error ? Object.assign({}, initialState.routine) : Object.assign({}, payload.routine),
         lifts: error ? Object.assign({}, initialState.lifts) : Object.assign({}, payload.lifts)
       })
+    // todo: test
+    case guideActions.UPDATE_GUIDE:
+      return Object.assign({}, state, {
+        routine: data.routine ? Object.assign({}, state.routine, data.routine) : state.routine,
+        lifts: data.lifts ? Object.assign({}, state.lifts, data.lifts) : state.lifts
+      })
     default:
       return state
   }

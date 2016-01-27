@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var StatsPlugin = require('stats-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -41,8 +42,8 @@ module.exports = {
         loader: 'json'
       },
       {
-        test: /\.css$/,
-        loaders: ['style', 'raw'],
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
         include: path.join(__dirname, '..')
       },
       {

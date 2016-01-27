@@ -14,6 +14,15 @@ export function receiveGuide(err, data) {
   }
 }
 
+// todo: test
+export const UPDATE_GUIDE = 'UPDATE_GUIDE'
+export function updateGuide(data) {
+  return {
+    type: UPDATE_GUIDE,
+    payload: data
+  }
+}
+
 export function fetchGuide(options = {}) {
   return (dispatch) => {
     const { user, routine, maxes } = options

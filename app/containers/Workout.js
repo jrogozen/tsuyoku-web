@@ -29,13 +29,19 @@ export default class Workout extends React.Component {
         <h1>Workouts</h1>
         <WorkoutNavigation />
 
-        {React.cloneElement(this.props.children, {
-          user: user,
-          guide: guide,
-          baseWorkout: getBaseWorkout(workouts),
-          workouts: workouts,
-          dispatch: dispatch
-        })}
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              {React.cloneElement(this.props.children, {
+                user: user,
+                guide: guide,
+                baseWorkout: getBaseWorkout(workouts),
+                workouts: workouts,
+                dispatch: dispatch
+              })}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

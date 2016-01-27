@@ -1,26 +1,88 @@
 /*
   Takes a guide and converts it to a Workout for saving
+
+  options:
+
+  1. change guide state
+  ~~2. keep interal state for guide and then save it as a new guide~~
+  3. have a new reducer state for pending-guide
 */
 
 import _ from 'lodash'
 import React from 'react'
 
-import WorkoutTimer from './WorkoutTimer'
 import { getDate } from '../utils/time'
+import * as workoutActions from '../actions/workout'
 
+import WorkoutTimer from './WorkoutTimer'
 import LiftWidget from './LiftWidget'
 
 export default class WorkoutForm extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      isPending: true,
+      routine: Object.assign({}, this.props.guide.routine),
+      lifts: {}
+    }
+
+    this.updateGuideState = (data) => {
+      const updatedState = Object.assign({}, this.state)
+      const updatedLifts = data.lifts
+
+      if (updatedLifts) {
+        _.forEach(updatedLifts, (lift, liftName) => {
+          if (!updatedState.lifts[liftName]) {
+            updatedState.lifts[liftName] = {}
+          }
+          updatedState.lifts[liftName] = _.assign(updatedState.lifts[liftName], updatedLifts[liftName]);
+        })
+      }
+
+      this.setState(updatedState)
+    }
+
+    this.handleClick = (e) => {
+      const { user, dispatch } = this.props
+
+      // specific to FTO
+      const liftName = _.keys(this.state.lifts)[0]
+      let lifts = []
+
+      // todo: extract to util
+      _.forEach(this.state.lifts[liftName], (set) => {
+        lifts.push({
+          name: liftName,
+          weight: set
+        })
+      })
+
+      const options = {
+        user,
+        workout: {
+          routine: this.state.routine,
+          lifts
+        }
+      }
+
+      dispatch(workoutActions.saveWorkout(options))
+
+      // todo: update user maxes if week 3!
+
+      // if (week % 3 === 0) {
+        // dispatch(userActions)
+      // }
+    }
   }
 
   render() {
-    const  { guide, user, saveWorkout } = this.props
+    const  { guide, user, dispatch } = this.props
     const currentDate = new Date()
-    return (
+
+    return (  
       <div className="workout-form-component">
-        <WorkoutTimer routine={guide.routine} workout={guide.lifts} />
+        <WorkoutTimer display={'info'} routine={guide.routine} workout={guide.lifts} />
 
         <div>
           <div className="left">
@@ -34,15 +96,51 @@ export default class WorkoutForm extends React.Component {
         {/* choose which form component to display */}
 
         {_.map(guide.lifts, (lift, liftName) => {
+          const hasAccessoryLifts = _.includes(_.keys(lift), 'accessoryLifts')
+
           return (
             <div key={liftName}>
-              <LiftWidget title="Warmup" sets={lift.warmup}/>
-              <LiftWidget title="Workout" sets={lift.sets}/>
+              <LiftWidget
+                lift={{
+                  type: 'warmup',
+                  title: 'Warmup',
+                  sets: lift.warmup,
+                  liftName: liftName
+                }}
+                updateGuideState={this.updateGuideState}
+              />
+              <LiftWidget
+                lift={{
+                  type: 'sets',
+                  title: 'Workout',
+                  sets: lift.sets,
+                  liftName: liftName
+                }}
+                updateGuideState={this.updateGuideState}
+              />
+              {hasAccessoryLifts ?
+                <div>
+                  <div>Accessory</div>
+                  {_.map(lift.accessoryLifts, (accessoryLift, accessoryLiftName) => {
+                    return (
+                      <LiftWidget
+                        lift={{
+                          type: 'sets',
+                          title: accessoryLiftName,
+                          sets: accessoryLift.sets,
+                          liftName: liftName
+                        }}
+                        updateGuideState={this.updateGuideState}
+                      />
+                    )
+                  })}
+                </div> : null
+              }
             </div>
           )
         })}
 
-        <button onClick={this.props.saveWorkout}>Finish Workout</button>
+        <button onClick={this.handleClick}>Finish Workout</button>
       </div>
     )
   }

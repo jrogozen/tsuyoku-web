@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 
 import DevTools from './DevTools'
 
+const stylesheet = require('../scss/containers/Root.scss')
+
 let isDev
 
 if (__DEV__) {

@@ -1,0 +1,61 @@
+@import '../imports.scss';
+
+li.set-widget-component {
+  color: black;
+  padding: 0;
+  float: left;
+  width: 100%;
+  margin: 5px 1.5%;
+  padding: 10px;
+  .outer-circle {
+    background: $grey;
+    // border: 2px solid $grey;
+    height: 80px;
+    width: 80px;
+    position: relative;
+  }
+  .inner-circle {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 13px 4px;
+    width: 72px;
+    height: 72px;
+    font-size: 14px;
+    text-align: center;
+    background: $light-grey;
+  }
+  .circle {
+    border-radius: 50%;
+  }
+  .reps {
+    font-size: 12px;
+  }
+  .weight {
+    font-weight: bold;
+  }
+  &.workout, &.warmup {
+    width: 30%;
+  }
+  &.active {
+    cursor: pointer;
+    .outer-circle {
+      background: $alert;
+    }
+    .inner-circle {
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    .outer-circle {
+      background: $alert;
+    }
+    .inner-circle {
+      background: $alert;
+      color: white;
+    }
+  }
+}
