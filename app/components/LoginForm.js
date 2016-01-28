@@ -70,11 +70,11 @@ export default class LoginForm extends React.Component {
           <label className={this.state.focusPassword ? 'filled' : ''}>password</label>
         </div>
         <div className="button-group">
+        <button className="alert" onClick={this.handleSubmit}>
+          Login
+        </button>
         {user.isWaiting ?
-          <Loader /> :
-          <button className="alert" onClick={this.handleSubmit}>
-            Login
-          </button>
+          <Loader /> : null
         }
         </div>
       </form>
