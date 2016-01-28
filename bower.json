@@ -1,0 +1,22 @@
+{
+  "name": "tsuyoku-web",
+  "description": "client side react, redux, react-router, express app",
+  "main": "index.js",
+  "authors": [
+    "jon rogozen"
+  ],
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/jrogozen/tsuyoku-web",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
