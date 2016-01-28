@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import React from 'react'
 import { Link } from 'react-router'
+import { routeActions } from 'redux-simple-router'
 
 import * as userActions from '../actions/user'
 
@@ -12,7 +13,7 @@ export default class Dashboard extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col s12">
+          <div className="col-sm-s12">
             <h1>Dashboard</h1>
             <h2>User Widgets</h2>
             <ul>
@@ -30,6 +31,10 @@ export default class Dashboard extends React.Component {
             <ul>
               {_.map(maxes, (weight, type) => <li key={type}>{type}: {weight}</li>)}
             </ul>
+            <p onClick={() => {
+              dispatch(userActions.requestLogout())
+              dispatch(routeActions.push('/'))
+            }}>[ Logout ]</p>
           </div>
         </div>
       </div>

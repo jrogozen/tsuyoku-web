@@ -4,16 +4,22 @@ import { connect } from 'react-redux'
 
 import Navigation from './Navigation'
 
+const stylesheet = require('../scss/components/Header')
+
 class Header extends React.Component {
   render() {
     const { user, dispatch } = this.props
 
     return (
       <header id="header">
-        <ul className="left">
-          <Link to="/">tsuyoku</Link>
-        </ul>
-        <Navigation user={user} dispatch={dispatch} />
+        <div className="logo">
+          <Link className="header-title" to="/">
+            <h1>TSUYOKU</h1>
+          </Link>
+        </div>
+        <div className="logo-image">
+          <Navigation user={user} dispatch={dispatch} />
+        </div>
       </header>
     )
   }

@@ -37,27 +37,4 @@
     color: black;
     font-size: 14px;
   }
-  .button-group {
-    clear: both;
-    float: left;
-    width: 100%;
-    margin: 40px 0;
-  }
-  button {
-    transition: all 0.25s;
-    margin: 20px 0;
-    border-radius: 10px;
-    padding: 10px 15px;
-    font-weight: bold;
-  }
-  .finish {
-    width: 100%;
-    background: white;
-    border: 2px solid $alert;
-    color: $alert;
-    &:hover {
-      background: $alert;
-      color: white;
-    }
-  }
 }

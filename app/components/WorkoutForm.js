@@ -144,7 +144,7 @@ export default class WorkoutForm extends React.Component {
         })}
         
         <div className="button-group">
-          <button className="finish" onClick={this.handleClick}>Finish Workout</button>
+          <button className="alert" onClick={this.handleClick}>Finish Workout</button>
         </div>
       </div>
     )

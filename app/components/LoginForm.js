@@ -1,12 +1,29 @@
 import React from 'react'
+import classnames from 'classnames'
 import { routeActions as route } from 'redux-simple-router'
 import { Link } from 'react-router'
 
+import Loader from './Loader'
+
 import * as userActions from '../actions/user'
+
+const stylesheet = require('../scss/components/LoginForm')
 
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      focusEmail: false,
+      focusPassword: false
+    }
+
+    this.handleFocusState = (target) => {
+      let state = Object.assign({}, this.state)
+      state[target] = !state[target]
+
+      this.setState(state)
+    }
 
     this.handleSubmit = (e) => {
       e.preventDefault()
@@ -45,18 +62,20 @@ export default class LoginForm extends React.Component {
     return (
       <form className="login-form-component">
         <div className="input-group">
-          <i className="material-icons prefix">account_circle</i>
-          <input ref={(ref) => this.email = ref} type="email" />
+          <input onFocus={this.handleFocusState.bind(null, 'focusEmail')} onBlur={this.handleFocusState.bind(null, 'focusEmail')} ref={(ref) => this.email = ref} type="email" />
+          <label className={this.state.focusEmail ? 'filled' : ''}>email</label>
         </div>
         <div className="input-group">
-          <i className="material-icons prefix">lock</i>
-          <input ref={(ref) => this.password = ref} type="password" />
+          <input onFocus={this.handleFocusState.bind(null, 'focusPassword')} onBlur={this.handleFocusState.bind(null, 'focusPassword')} ref={(ref) => this.password = ref} type="password" />
+          <label className={this.state.focusPassword ? 'filled' : ''}>password</label>
         </div>
-        <div className="input-group">
-          <button onClick={this.handleSubmit}>
-            {user.isWaiting ? 'Logging in...' : 'Login'}
-            <i className="material-icons">send</i>
+        <div className="button-group">
+        {user.isWaiting ?
+          <Loader /> :
+          <button className="alert" onClick={this.handleSubmit}>
+            Login
           </button>
+        }
         </div>
       </form>
     )

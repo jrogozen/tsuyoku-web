@@ -1,0 +1,28 @@
+@import '../imports.scss';
+
+.loader-component {
+    i {
+      color: $alert;
+      animation: twitch 2s infinite;
+      font-size: 32px;
+    }
+}
+
+@keyframes twitch {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(50deg) scale(0.9, 0.9);
+  }
+  50% {
+    color: $warning;
+    transform: rotate(0deg) scale(1.1, 1.1);
+  }
+  75% {
+    transform: rotate(-50deg) scale(0.9, 0.9);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

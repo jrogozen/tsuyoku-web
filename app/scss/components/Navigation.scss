@@ -1,0 +1,13 @@
+@import '../imports.scss';
+
+.navigation-component {
+  .face {
+    transition: all 0.2s;
+    font-size: 24px;
+    color: $alert;
+    &:hover {
+      text-decoration: underline;
+      color: $warning;
+    }
+  }
+}

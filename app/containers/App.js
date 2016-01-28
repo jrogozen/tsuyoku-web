@@ -35,7 +35,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <Header />
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <Header />
+            </div>
+          </div>
+        </div>
         {React.cloneElement(this.props.children, {
           user: this.props.user,
           guide: this.props.guide,
