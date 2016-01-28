@@ -30,6 +30,10 @@ module.exports = {
       __DEV__: false
     })
   ],
+  resolve: {
+    root: path.resolve(__dirname, '..'),
+    extensions: ['', '.js', '.scss']
+  },
   module: {
     loaders: [
       {
