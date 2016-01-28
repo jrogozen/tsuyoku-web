@@ -13,7 +13,7 @@ export default class Dashboard extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-sm-s12">
+          <div className="col-xs-12">
             <h1>Dashboard</h1>
             <h2>User Widgets</h2>
             <ul>

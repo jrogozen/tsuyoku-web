@@ -1,13 +1,34 @@
 @import '../imports.scss';
 
 .navigation-component {
-  .face {
-    transition: all 0.2s;
-    font-size: 24px;
-    color: $alert;
-    &:hover {
-      text-decoration: underline;
-      color: $warning;
+  text-align: center;
+  @include breakpoint(md-and-up) {
+    text-align: left;
+  }
+  ul {
+    li {
+      position: relative;
+      display: inline-block;
+      margin-right: 5px;
+      a {
+        position: relative;
+        background: linear-gradient(to right, white 50%, $light-grey 50%);
+        background-size: 200% 100%;
+        background-position: 100% 0%;
+        padding: 2px 5px;
+        display: block;
+        font-size: 16px;
+        color: $dark;
+        font-family: $font-family-bold;
+        font-weight: 300;
+        text-transform: uppercase;
+        transition: all 0.25s linear;
+        &:hover {
+          background-position: 0% 0%;
+          color: $alert;
+          text-decoration: none;
+        }
+      }
     }
   }
 }

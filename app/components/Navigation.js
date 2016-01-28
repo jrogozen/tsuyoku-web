@@ -19,26 +19,20 @@ export default class Navigation extends React.Component {
     // }
   }
 
-  getCss() {
-    return {
-      'face': {
-        'face': true,
-        'material-icons': true,
-        'dark': this.props.user.isAuthenticated,
-      }
-    }
-  }
-
   render() {
     const { dispatch, user } = this.props
 
     return (
       <nav className="navigation-component">
-        <ul className="right">
+        <ul>
           <li>
-            <Link to='/dashboard'>
-              <i className={classnames(this.getCss().face)}>face</i>
-            </Link>
+            <Link to="/workouts/create">New Workout</Link>
+          </li>
+          <li>
+            <Link to="/workouts">History</Link>
+          </li>
+          <li>
+            <Link to="/dashboard">Dashboard</Link>
           </li>
         </ul>
       </nav>

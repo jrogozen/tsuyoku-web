@@ -2,6 +2,11 @@
 
 #header {
   margin: 20px 0;
+  text-align: center;
+
+  @include breakpoint(md-and-up) {
+    text-align: left;
+  }
 
   ul {
     list-style: none;
@@ -27,6 +32,16 @@
     transition: all 0.2s;
     &:hover {
       text-decoration: overline;
+      color: $warning;
+    }
+  }
+
+  .face {
+    transition: all 0.2s;
+    font-size: 24px;
+    color: $alert;
+    &:hover {
+      text-decoration: underline;
       color: $warning;
     }
   }

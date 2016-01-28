@@ -1,3 +1,5 @@
+/* NOT CURRENTLY USED */
+
 import React from 'react'
 import { Link } from 'react-router'
 import { routeActions } from 'redux-simple-router'

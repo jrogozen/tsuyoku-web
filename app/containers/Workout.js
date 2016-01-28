@@ -26,9 +26,6 @@ export default class Workout extends React.Component {
 
     return (
       <div className="workout-container">
-        <h1>Workouts</h1>
-        <WorkoutNavigation />
-
         <div className="container">
           <div className="row">
             <div className="col-sm-12">

@@ -1,12 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
+import classnames from 'classnames'
 
 import Navigation from './Navigation'
 
 const stylesheet = require('../scss/components/Header')
 
 class Header extends React.Component {
+  getCss() {
+    return {
+      'face': {
+        'face': true,
+        'material-icons': true,
+        'dark': this.props.user.isAuthenticated,
+      }
+    }
+  }
+
   render() {
     const { user, dispatch } = this.props
 
@@ -18,6 +29,11 @@ class Header extends React.Component {
           </Link>
         </div>
         <div className="logo-image">
+            <Link to='/dashboard'>
+              <i className={classnames(this.getCss().face)}>face</i>
+            </Link>
+        </div>
+        <div className="navigation-wrapper">
           <Navigation user={user} dispatch={dispatch} />
         </div>
       </header>

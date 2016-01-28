@@ -1,3 +1,8 @@
+@import '../imports.scss';
+
 #login-container {
   text-align: center;
+  @include breakpoint(md-and-up) {
+    text-align: left;
+  }
 }
