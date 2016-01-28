@@ -9,7 +9,7 @@
     "dev": "NODE_ENV=development node bin/server.js",
     "test": "karma start --single-run",
     "test:watch": "karma start",
-    "postinstall": "npm run build"
+    "postinstall": "./node_modules/bower/bin/bower install && npm run build"
   },
   "author": "jon rogozen",
   "license": "UNLICENSED",
@@ -26,6 +26,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.4.3",
     "babel-runtime": "^6.3.19",
+    "bower": "^1.7.7",
     "classnames": "^2.2.3",
     "css-loader": "^0.23.1",
     "debug": "^2.2.0",
