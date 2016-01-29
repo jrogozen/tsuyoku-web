@@ -6,6 +6,16 @@
       animation: twitch 2s infinite;
       font-size: 32px;
     }
+    &.entry-loader {
+      text-align: center;
+      @include breakpoint(md-and-up) {
+        text-align: left;
+      }
+      margin: 80px auto;
+      i {
+        font-size: 80px;
+      }
+    }
 }
 
 @keyframes twitch {

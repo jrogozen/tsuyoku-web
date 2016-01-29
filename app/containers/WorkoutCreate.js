@@ -1,18 +1,30 @@
 import React from 'react'
 
 import WorkoutForm from '../components/WorkoutForm'
+import Loader from '../components/Loader'
 
 import * as workoutActions from '../actions/workout'
 import * as guideActions from '../actions/guide'
 import * as userActions from '../actions/user'
-import { shouldIncrementWeek, getNextLift } from '../utils/fiveThreeOne'
+import { getBaseWorkout, shouldIncrementWeek, getNextLift } from '../utils/fiveThreeOne'
 
 var stylesheet = require('../scss/containers/WorkoutCreate.scss')
 
 export default class WorkoutCreate extends React.Component {
   componentWillMount() {
-    const { user, dispatch } = this.props
-    const baseWorkout = this.props.baseWorkout
+    const { dispatch, user, guide, workouts } = this.props
+    const options = {
+      user,
+      routineName: '5/3/1'
+    }
+
+    dispatch(workoutActions.fetchWorkouts(options))
+      .then(() => this.fetchGuide())
+  }
+
+  fetchGuide() {
+    const { user, workouts, dispatch } = this.props
+    const baseWorkout = getBaseWorkout(workouts)
     const lift = getNextLift(baseWorkout.lifts[0].name)
     const options = {
       user: user,
@@ -38,15 +50,14 @@ export default class WorkoutCreate extends React.Component {
     return (
       <div className="workout-create-container">
         {guide.isWaiting ?
-          <span>Generating...</span> : null
+          <Loader /> : null
         }
         {_.size(guide.lifts) > 0 ?
           <WorkoutForm
             dispatch={dispatch}
             guide={guide}
             user={user}
-          /> : null
-        }
+          /> : null}
       </div>
     )
   }

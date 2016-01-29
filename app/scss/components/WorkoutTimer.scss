@@ -1,0 +1,22 @@
+@import '../imports';
+
+.workout-timer-component {
+  margin: 20px 0;
+  .info {
+    font-family: $font-family-bold;
+    text-align: center;
+    font-size: 22px;
+    height: 51px;
+    padding: 10px;
+  }
+  .timer {
+    text-align: center;
+    background: $alert;
+    color: white;
+    font-size: 22px;
+    font-family: $font-family-bold;
+    padding: 10px;
+    cursor: pointer;
+    height: 51px;
+  }
+}

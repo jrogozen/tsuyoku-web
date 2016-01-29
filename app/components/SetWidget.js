@@ -19,6 +19,7 @@ export default class SetWidget extends React.Component {
       const { updateGuideState, liftKey, lift } = this.props
       const { type, liftName } = lift
       const set = this.state.set;
+
       let updatedLifts = {}
       let newState = {}
       let removeLift = false
@@ -47,6 +48,8 @@ export default class SetWidget extends React.Component {
           updateGuideState({
             lifts: updatedLifts
           })
+        } else {
+          updateGuideState()
         }
       })
     }
@@ -63,7 +66,6 @@ export default class SetWidget extends React.Component {
   }
 
   render() {
-    console.log(this.props.lift.title)
     const weight = this.state.initialSet[0]
     const reps = this.state.set.length
 

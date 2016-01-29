@@ -1,9 +1,17 @@
 import _ from 'lodash'
 import React from 'react'
 
+import { capitalize, secondsToTime } from '../utils/format'
+
+const stylesheet = require('../scss/components/WorkoutTimer')
+
 export default class WorkoutTimer extends React.Component {
   constructor(props) {
     super(props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+
   }
 
   getWorkoutType(routine, workout) {
@@ -15,14 +23,15 @@ export default class WorkoutTimer extends React.Component {
   }
 
   render() {
-    const { workout, routine } = this.props
+    const { workout, routine, display, timer, clearTimer } = this.props
+
     return (
       <div className="workout-timer-component">
-        {this.props.display === 'info' ?
-          <div>{this.getWorkoutType(routine, workout)}</div> : null
+        {display === 'info' ?
+          <div className="info">{capitalize(this.getWorkoutType(routine, workout))}</div> : null
         }
-        {this.props.display === 'timer' ?
-          <div>TIMER - 00:00</div> : null
+        {display === 'timer' ?
+          <div onClick={clearTimer} className="timer">TIMER - {secondsToTime(timer)}</div> : null
         }
       </div>
     )

@@ -27,10 +27,12 @@ export default class WorkoutForm extends React.Component {
     this.state = {
       isPending: true,
       routine: Object.assign({}, this.props.guide.routine),
-      lifts: {}
+      lifts: {},
+      timerDisplay: 'info',
+      timer: 0
     }
 
-    this.updateGuideState = (data) => {
+    this.updateGuideState = (data = {}) => {
       const updatedState = Object.assign({}, this.state)
       const updatedLifts = data.lifts
 
@@ -43,7 +45,16 @@ export default class WorkoutForm extends React.Component {
         })
       }
 
+      updatedState.timerDisplay = 'timer'
+      updatedState.timer = 0
+
+      this.startTimer()
       this.setState(updatedState)
+    }
+
+    this.clearTimer = () => {
+      this.setState({ timerDisplay: 'info' })
+      clearInterval(this.interval)
     }
 
     this.handleClick = (e) => {
@@ -79,13 +90,35 @@ export default class WorkoutForm extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    clearTimer()
+  }
+
+  interval: null;
+
+  startTimer() {
+    clearInterval(this.interval)
+
+    this.interval = setInterval(() => {
+      this.setState({
+        timer: this.state.timer + 1
+      })
+    }, 1000)
+  }
+
   render() {
     const  { guide, user, dispatch } = this.props
     const currentDate = new Date()
 
     return (  
       <div className="workout-form-component">
-        <WorkoutTimer display={'info'} routine={guide.routine} workout={guide.lifts} />
+        <WorkoutTimer
+          clearTimer={this.clearTimer}
+          timer={this.state.timer}
+          display={this.state.timerDisplay}
+          routine={guide.routine}
+          workout={guide.lifts}
+        />
 
         <div className="workout-title-bar">
           <div className="left">

@@ -16,7 +16,7 @@ export const getBaseWorkout = function getBaseWorkout(workouts = {}) {
     }
   }
 
-  return _.sortBy(data, (workout) => -workout.created_at)[0]
+  return _.omit(_.sortBy(data, (workout) => -workout.created_at)[0], ['created_at', 'updated_at', 'userId'])
 }
 
 export const getNextLift = function getNextLift(prevLift) {

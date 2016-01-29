@@ -12,7 +12,7 @@ export const initialState = {
   lifts: {}
 }
 
-export default function workouts(state = initialState, action = {}) {
+export default function guide(state = initialState, action = {}) {
   let { payload, error, type } = action
 
   switch (action.type) {

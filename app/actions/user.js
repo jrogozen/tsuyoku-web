@@ -1,6 +1,8 @@
 import fetch from '../utils/fetch'
 import user from '../models/user'
 
+import timeout from '../utils/timer'
+
 export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export function requestLogin() {
   return { type: REQUEST_LOGIN }
@@ -33,11 +35,11 @@ export function fetchLogin(credentials) {
   return (dispatch) => {
     dispatch(requestLogin())
 
-    return fetch(null, dispatch, {
+    return timeout(fetch(null, dispatch, {
       method: 'post',
       endpoint: 'login',
       data: credentials
-    })
+    }), 2000)
       .then(json => {
         if (!json.success) {
           throw json.error
