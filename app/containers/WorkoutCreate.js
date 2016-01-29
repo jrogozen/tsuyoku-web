@@ -1,4 +1,5 @@
 import React from 'react'
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import WorkoutForm from '../components/WorkoutForm'
 import Loader from '../components/Loader'
@@ -11,6 +12,8 @@ import { getBaseWorkout, shouldIncrementWeek, getNextLift } from '../utils/fiveT
 var stylesheet = require('../scss/containers/WorkoutCreate.scss')
 
 export default class WorkoutCreate extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
   componentWillMount() {
     const { dispatch, user, guide, workouts } = this.props
     const options = {

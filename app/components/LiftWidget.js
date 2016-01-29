@@ -1,5 +1,5 @@
 import React from 'react'
-
+import shouldPureComponentUpdate from 'react-pure-render/function';
 import SetWidget from './SetWidget'
 
 import { capitalize } from '../utils/format'
@@ -10,6 +10,8 @@ export default class LiftWidget extends React.Component {
   constructor(props) {
     super(props)
   }
+
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
     const { lift, updateGuideState } = this.props

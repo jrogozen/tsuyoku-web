@@ -10,6 +10,7 @@
 
 import _ from 'lodash'
 import React from 'react'
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import { getDate } from '../utils/time'
 import * as workoutActions from '../actions/workout'
@@ -89,6 +90,8 @@ export default class WorkoutForm extends React.Component {
       // }
     }
   }
+
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
   componentWillUnmount() {
     clearTimer()

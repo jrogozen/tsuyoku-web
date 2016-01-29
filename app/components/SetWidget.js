@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-
+import shouldPureComponentUpdate from 'react-pure-render/function';
 import * as guideActions from '../actions/guide'
 
 const stylesheet = require('../scss/components/SetWidget.scss')
@@ -54,6 +54,8 @@ export default class SetWidget extends React.Component {
       })
     }
   }
+
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
   getCss() {
     return classnames({
