@@ -21,14 +21,36 @@ describe('fiveThreeOne utils', () => {
       const workouts = {
         data: {
           '1': {
-            created_at: 5
+            created_at: 5,
+            routine: 'hello'
           },
           '2': {
-            created_at: 10
+            created_at: 10,
+            routine: 'goodbye'
           }
         }
       }
-      expect(utils.getBaseWorkout(workouts)).to.deep.eq({created_at: 10})
+      expect(utils.getBaseWorkout(workouts)).to.deep.eq({routine: 'goodbye'})
+    })
+
+    it('omits created_at, updated_at, and userId', () => {
+      const workouts = {
+        data: {
+          '1': {
+            created_at: 5,
+            userId: 10,
+            updated_at: 6,
+            routine: 'hello'
+          },
+          '2': {
+            created_at: 10,
+            userId: 10,
+            updated_at: 6,
+            routine: 'goodbye'
+          }
+        }
+      }
+      expect(utils.getBaseWorkout(workouts)).to.deep.eq({routine: 'goodbye'})
     })
   })
 
