@@ -4,6 +4,7 @@ import _ from 'lodash'
 import * as workoutActions from '../actions/workout'
 
 import WorkoutWidget from '../components/WorkoutWidget'
+import Loader from '../components/Loader'
 
 export default class WorkoutsView extends React.Component {
   componentWillMount() {
@@ -23,7 +24,9 @@ export default class WorkoutsView extends React.Component {
     return (
       <div className="workouts-view-component">
         <h2>Workouts View</h2>
-        {workouts.isWaiting ? 'Loading...' : null}
+        {workouts.isWaiting || _.size(workoutData) < 1 ?
+          <Loader /> : null
+        }
         {_.map(workoutData, (workout) => {
           return <WorkoutWidget workout={workout} />        
         })}

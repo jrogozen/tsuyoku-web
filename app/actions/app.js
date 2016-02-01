@@ -1,4 +1,3 @@
-// todo: test
 export const SET_APP_BOOL = 'SET_APP_BOOL'
 export function setAppBool(key, bool) {
   return {

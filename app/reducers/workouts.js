@@ -1,6 +1,6 @@
 import * as workoutActions from '../actions/workout'
 
-const initialState = {
+export const initialState = {
   isWaiting: false,
   data: {}
 }

@@ -9,3 +9,9 @@
 
 ### Demo ###
 testy@gmail.com // 123456
+
+### Todo ###
+- server side rendering
+- more robust api fetcing test suite
+- test components
+- fix mobile chrome (react-router/history upgrade?)

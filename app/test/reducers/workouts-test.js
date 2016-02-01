@@ -1,11 +1,8 @@
 import { expect, workoutActions } from '../utils'
 
 import reducer from '../../reducers/workouts'
+import { initialState } from '../../reducers/workouts'
 
-const initialState = {
-  isWaiting: false,
-  data: {}
-}
 const workoutBase = { lifts: 100, weight: 'a ton' }
 
 describe('Workouts reducer', () => {
