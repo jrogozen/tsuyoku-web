@@ -37,11 +37,15 @@ describe('Workout actions', () => {
   })
 
   it('creates RECEIVE_WORKOUT action from receiveWorkouts() action', () => {
-    const payload = [{ _id: 1, name: 'bench'}, { _id: 2, name: 'press' }]
+    const data = [
+      { _id: 1, lifts: [{ name: 'bench' }]},
+      { _id: 2, lifts: [{ name: 'press' }]}
+    ]
     const expectedAction = { type: workoutActions.RECEIVE_WORKOUT, payload: {
-      1: { name: 'bench' }, 2: { name: 'press' }
+      1: { lifts: [{ name: 'bench' }] },
+      2: { lifts: [{ name: 'press' }] }
     }, error: undefined }
-    expect(workoutActions.receiveWorkouts(null, payload)).to.deep.eq(expectedAction)
+    expect(workoutActions.receiveWorkouts(null, data)).to.deep.eq(expectedAction)
   })
 
   it('handles receiveWorkouts() errors', () => {
@@ -80,7 +84,7 @@ describe('Workout actions', () => {
         .get('/workouts/byUser')
         .query(true)
         .reply(200, {
-          data: [{ _id: 1, name: 'bench' }],
+          data: [{ _id: 1, lifts: [{ name: 'bench' }]}],
           api_access_token: 'mahalo',
           success: true
         })
@@ -88,7 +92,7 @@ describe('Workout actions', () => {
       const expectedActions = [
         { type: workoutActions.REQUEST_WORKOUT },
         { type: workoutActions.RECEIVE_WORKOUT, payload: {
-          1: { name: 'bench' }
+          1: { lifts: [{ name: 'bench' }] }
         }, error: undefined }
       ]
 
