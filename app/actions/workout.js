@@ -1,4 +1,6 @@
 import fetch from '../utils/fetch'
+import * as guideActions from '../actions/guide'
+import * as guideReducer from '../reducers/guide'
 
 export const REQUEST_WORKOUT = 'REQUEST_WORKOUT'
 export function requestWorkout() {
@@ -35,7 +37,15 @@ export function receiveWorkouts(err, data) {
 
       delete parsedWorkout['_id']
       
-      workoutObj[workout._id] = parsedWorkout
+      parsedWorkout.lifts.forEach((lift, i) => {
+        if (!lift || !lift.name) {
+          delete parsedWorkout.lifts[i]
+        }
+      })
+
+      if (parsedWorkout.lifts.length > 0) {
+        workoutObj[workout._id] = parsedWorkout
+      }
     })
   }
 
@@ -73,6 +83,7 @@ export function saveWorkout(options = {}) {
         user,
         routineName: workout.routine.name
       }))
+      dispatch(guideActions.receiveGuide(guideReducer.initialState))
     }).catch(err => dispatch(receiveWorkout(err)))
   }
 }

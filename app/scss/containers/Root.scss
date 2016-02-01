@@ -24,6 +24,10 @@ a {
     color: $warning;
     text-decoration: underline;
   }
+  &:focus {
+    outline: 0;
+    text-decoration: none;
+  }
 }
 
 .button-group {

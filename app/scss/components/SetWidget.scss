@@ -13,6 +13,9 @@ li.set-widget-component {
     height: 80px;
     width: 80px;
     position: relative;
+    &:hover {
+      background: $alert;
+    }
   }
   .inner-circle {
     position: absolute;
@@ -27,6 +30,11 @@ li.set-widget-component {
     font-size: 14px;
     text-align: center;
     background: $light-grey;
+    &:hover {
+      cursor: pointer;
+      background: $alert;
+      color: white;
+    }
   }
   .circle {
     border-radius: 50%;
@@ -51,18 +59,6 @@ li.set-widget-component {
     cursor: pointer;
     .outer-circle {
       background: $alert;
-    }
-    .inner-circle {
-    }
-  }
-  &:hover {
-    cursor: pointer;
-    .outer-circle {
-      background: $alert;
-    }
-    .inner-circle {
-      background: $alert;
-      color: white;
     }
   }
 }

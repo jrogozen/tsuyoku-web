@@ -1,5 +1,4 @@
 import React from 'react'
-import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import WorkoutForm from '../components/WorkoutForm'
 import Loader from '../components/Loader'
@@ -12,7 +11,6 @@ import { getBaseWorkout, shouldIncrementWeek, getNextLift } from '../utils/fiveT
 var stylesheet = require('../scss/containers/WorkoutCreate.scss')
 
 export default class WorkoutCreate extends React.Component {
-  shouldComponentUpdate = shouldPureComponentUpdate;
 
   componentWillMount() {
     const { dispatch, user, guide, workouts } = this.props
@@ -28,12 +26,13 @@ export default class WorkoutCreate extends React.Component {
   fetchGuide() {
     const { user, workouts, dispatch } = this.props
     const baseWorkout = getBaseWorkout(workouts)
-    const lift = getNextLift(baseWorkout.lifts[0].name)
+    const baseLifts = baseWorkout.lifts[0] || {}
+    const lift = getNextLift(baseLifts.name)
     const options = {
       user: user,
       routine: {
         name: baseWorkout.routine.name,
-        week: lift === 'squat' ?
+        week: baseLifts.name === 'squat' ?
           baseWorkout.routine.week + 1 : baseWorkout.routine.week,
         options: {
           accessory: 'boring but big'

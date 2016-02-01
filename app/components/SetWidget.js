@@ -29,7 +29,6 @@ export default class SetWidget extends React.Component {
           newState.set = set.slice(0, this.state.set.length - 1);
         } else {
           removeLift = true
-          newState.enabled = false
           newState.set = this.state.initialSet
         }
       } else {
@@ -72,9 +71,9 @@ export default class SetWidget extends React.Component {
     const reps = this.state.set.length
 
     return (
-      <li key={this.props.lift.title + '-' + this.props.liftKey} className={this.getCss()} onClick={this.handleClick}>
+      <li key={this.props.lift.title + '-' + this.props.liftKey} className={this.getCss()}>
         <div className="outer-circle circle">
-          <div className="inner-circle circle ">
+          <div onClick={this.handleClick} className="inner-circle circle ">
             <span className="reps">
               {reps} reps @
             </span>

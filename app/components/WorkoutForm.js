@@ -1,16 +1,5 @@
-/*
-  Takes a guide and converts it to a Workout for saving
-
-  options:
-
-  1. change guide state
-  ~~2. keep interal state for guide and then save it as a new guide~~
-  3. have a new reducer state for pending-guide
-*/
-
 import _ from 'lodash'
 import React from 'react'
-import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import { getDate } from '../utils/time'
 import * as workoutActions from '../actions/workout'
@@ -28,14 +17,18 @@ export default class WorkoutForm extends React.Component {
     this.state = {
       isPending: true,
       routine: Object.assign({}, this.props.guide.routine),
-      lifts: {},
+      lifts: this.getDefaultLifts(),
       timerDisplay: 'info',
       timer: 0
     }
 
     this.updateGuideState = (data = {}) => {
-      const updatedState = Object.assign({}, this.state)
+      let updatedState = Object.assign({}, this.state)
       const updatedLifts = data.lifts
+
+      if (updatedState.lifts.isDefault && updatedLifts) {
+        updatedState.lifts = {}
+      }
 
       if (updatedLifts) {
         _.forEach(updatedLifts, (lift, liftName) => {
@@ -65,8 +58,13 @@ export default class WorkoutForm extends React.Component {
       const liftName = _.keys(this.state.lifts)[0]
       let lifts = []
 
+      // this.state.lifts[liftName] = {
+      //   0: [180, 180],
+      //   1: [180, 180]
+      // }
+
       // todo: extract to util
-      _.forEach(this.state.lifts[liftName], (set) => {
+      _.forEach(this.state.lifts[liftName], (set, setName) => {
         lifts.push({
           name: liftName,
           weight: set
@@ -81,7 +79,12 @@ export default class WorkoutForm extends React.Component {
         }
       }
 
+      // lifts = [
+      //   { name: 'deadlift', weight: [180] }
+      // ]
+
       dispatch(workoutActions.saveWorkout(options))
+      dispatch(routeActions.push('/workouts'))
 
       // todo: update user maxes if week 3!
 
@@ -91,13 +94,33 @@ export default class WorkoutForm extends React.Component {
     }
   }
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
-
   componentWillUnmount() {
-    clearTimer()
+    this.clearTimer()
   }
 
   interval: null;
+
+  getDefaultLifts() {
+    const defaultGuideLifts = this.props.guide.lifts
+    let defaultLifts = {}
+
+    _.forEach(defaultGuideLifts, (lift, name) => {
+      defaultLifts[name] = {}
+
+      if (lift.sets.length > 0) {
+        lift.sets.forEach((set, key) => {
+          set = set.map(() => 0)
+          defaultLifts[name][key] = set
+        })
+      } else {
+        defaultLifts[name][0] = [0]
+      }
+    })
+
+    defaultLifts.isDefault = true;
+
+    return defaultLifts
+  }
 
   startTimer() {
     clearInterval(this.interval)
