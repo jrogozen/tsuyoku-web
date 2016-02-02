@@ -49,6 +49,8 @@ export default class WorkoutsView extends React.Component {
           return p + c
         }, 0)
       }, 0)
+
+      // todo: add % change from previous month
     })
 
     return (
@@ -57,7 +59,7 @@ export default class WorkoutsView extends React.Component {
         {workouts.isWaiting || _.size(sortedWorkouts) < 1 ?
           <Loader /> : null
         }
-        <HistoryList workoutHistory={workoutHistory} />
+        <HistoryList user={user} workoutHistory={workoutHistory} />
       </div>
     )
   }

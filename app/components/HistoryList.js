@@ -15,16 +15,24 @@ export default class HistoryList extends React.Component {
   render() {
     // workouts are from reducer, workoutHistory are from WorkoutsView
     const { user, workouts, workoutHistory } = this.props
-
+    console.log(workoutHistory)
     // conditionally render list or monthly stat
     return (
       <div className="history-list-component">
+        <div className="history-list-title">Month, Year</div>
         {_.map(workoutHistory, (month) => {
-          <ul>
-            {this.state.historyDisplay === 'summary' ?
-              <HistorySummary month={month} /> : null
-            }
-          </ul>
+          return (
+            <ul>
+              {this.state.historyDisplay === 'summary' ?
+                <li><HistorySummary user={user} month={month} /></li> : null
+              }
+              {this.state.historyDisplay === 'list' ?
+                month.workouts.map((workout) => {
+                  return <HistoryWidget workout={workout} />
+                }) : null
+              }
+            </ul>
+          )
         })}
       </div>
     )
