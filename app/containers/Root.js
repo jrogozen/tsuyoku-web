@@ -1,6 +1,7 @@
 import React from 'react'
 import { Router } from 'react-router'
 import { Provider } from 'react-redux'
+import fastClick from 'fastclick'
 
 import DevTools from './DevTools'
 
@@ -13,6 +14,10 @@ if (__DEV__) {
 }
 
 export default class Root extends React.Component {
+  componentWillMount() {
+    fastClick.attach(document.body);
+  }
+
   render() {
     const { store, history, routes } = this.props
 

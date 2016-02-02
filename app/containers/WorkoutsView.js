@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 import * as workoutActions from '../actions/workout'
 
-import WorkoutWidget from '../components/WorkoutWidget'
+import HistoryList from '../components/HistoryList'
 import Loader from '../components/Loader'
 
 export default class WorkoutsView extends React.Component {
@@ -17,19 +17,47 @@ export default class WorkoutsView extends React.Component {
     dispatch(workoutActions.fetchWorkouts(options))
   }
 
+  monthDict(num) {
+    const dict = ['january', 'february', 'march', 'april', 'may',
+      'june', 'july', 'august', 'september', 'october', 'november', 'december']
+
+    return dict[num]
+  }
+
   render() {
     const { dispatch, user, workouts } = this.props
-    const workoutData = _.sortBy(workouts.data, (workout) => -workout.created_at)
+    const sortedWorkouts = _.sortBy(workouts.data, (workout) => -workout.created_at)
+    let workoutHistory = {}
+
+    sortedWorkouts.forEach((workout) => {
+      const month = new Date(workout.created_at).getMonth()
+
+      if (!workoutHistory[month]) {
+        workoutHistory[month] = {
+          workouts: [],
+          totalWorkouts: 0,
+          totalLb: 0,
+          month: this.monthDict(month)
+        }
+      }
+
+      workoutHistory[month].totalWorkouts += 1
+      workoutHistory[month].workouts.push(workout)
+
+      workoutHistory[month].totalLb += workout.lifts.reduce((prev, current, i, arr) => {
+        return prev + arr[i].weight.reduce((p, c) => {
+          return p + c
+        }, 0)
+      }, 0)
+    })
 
     return (
       <div className="workouts-view-component">
         <h2>Workouts View</h2>
-        {workouts.isWaiting || _.size(workoutData) < 1 ?
+        {workouts.isWaiting || _.size(sortedWorkouts) < 1 ?
           <Loader /> : null
         }
-        {_.map(workoutData, (workout) => {
-          return <WorkoutWidget workout={workout} />        
-        })}
+        <HistoryList workoutHistory={workoutHistory} />
       </div>
     )
   }
