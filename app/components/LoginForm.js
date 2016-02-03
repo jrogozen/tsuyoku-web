@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { routeActions as route } from 'redux-simple-router'
+import { routeActions as route } from 'react-router-redux'
 import { Link } from 'react-router'
 
 import Loader from './Loader'

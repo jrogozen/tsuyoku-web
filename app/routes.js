@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-import { routeActions } from 'redux-simple-router'
+import { routeActions } from 'react-router-redux'
 
 import App from './containers/App'
 import Home from './containers/Home'

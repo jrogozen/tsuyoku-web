@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Link } from 'react-router'
-import { routeActions } from 'redux-simple-router'
+import { routeActions } from 'react-router-redux'
 import classnames from 'classnames'
 
 import * as userActions from '../actions/user'

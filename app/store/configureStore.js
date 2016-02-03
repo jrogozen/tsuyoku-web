@@ -3,7 +3,7 @@ import rootReducer from '../reducers'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 import DevTools from '../containers/DevTools'
-import { syncHistory } from 'redux-simple-router'
+import { syncHistory } from 'react-router-redux'
 
 let isDev
 

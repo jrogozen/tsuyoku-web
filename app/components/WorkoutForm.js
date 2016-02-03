@@ -3,7 +3,7 @@ import React from 'react'
 
 import { getDate } from '../utils/time'
 import * as workoutActions from '../actions/workout'
-import { routeActions } from 'redux-simple-router'
+import { routeActions } from 'react-router-redux'
 
 import WorkoutTimer from './WorkoutTimer'
 import LiftWidget from './LiftWidget'
