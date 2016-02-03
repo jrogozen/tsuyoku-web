@@ -2,6 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 var StatsPlugin = require('stats-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
+var cssnano = require('cssnano');
 
 module.exports = {
   entry: [
@@ -48,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader'),
         include: path.join(__dirname, '..')
       },
       {
@@ -57,5 +59,8 @@ module.exports = {
         query: {limit: 10240} 
       }
     ]
+  },
+  postcss: function() {
+    return [autoprefixer, cssnano];
   }
 };

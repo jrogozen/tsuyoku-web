@@ -29,6 +29,7 @@ export default class WorkoutsView extends React.Component {
     const sortedWorkouts = _.sortBy(workouts.data, (workout) => -workout.created_at)
     let workoutHistory = {}
 
+    // todo: support years
     sortedWorkouts.forEach((workout) => {
       const month = new Date(workout.created_at).getMonth()
 
@@ -55,10 +56,9 @@ export default class WorkoutsView extends React.Component {
 
     return (
       <div className="workouts-view-component">
-        <h2>Workouts View</h2>
-        {workouts.isWaiting || _.size(sortedWorkouts) < 1 ?
+        {/*workouts.isWaiting || _.size(sortedWorkouts) < 1 ?
           <Loader /> : null
-        }
+        */}
         <HistoryList user={user} workoutHistory={workoutHistory} />
       </div>
     )

@@ -1,0 +1,51 @@
+@import '../imports.scss';
+
+.history-widget-component {
+  border-bottom: 2px solid $grey;
+  margin-bottom: 2px;
+  padding: 20px 30px;
+  float: left;
+  width: 100%;
+  // transition: all 0.2s ease-in;
+  cursor: pointer;
+  // background: $alert;
+  &.odd {
+    background: $light-grey;
+  }
+  .history-widget-left {
+    float: left;
+    text-align: center;
+    margin-right: 40px;
+    .date-title {
+      font-family: $font-family-bold;
+      font-size: 22px;
+    }
+    .day-title {
+      margin-top: 10px;
+      font-size: 10px;
+    }
+  }
+  .history-widget-right {
+    float: left;
+    .lift-title {
+      margin-right: 10px;
+      font-size: 22px;
+      display: inline-block;
+    }
+    .lift-max {
+      display: inline-block;
+      font-size: 28px;
+      line-height: 28px;
+      font-family: $font-family-bold;
+    }
+    .lift-set {
+      margin-right: 5px;
+      &:last-child:after {
+        content: '';
+      }
+      &:after {
+        content: ', ';
+      }
+    }
+  }
+}

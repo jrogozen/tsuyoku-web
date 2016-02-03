@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
+var cssnano = require('cssnano');
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -39,7 +41,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader',
+        loader: 'style-loader!css-loader!postcss-loader!sass-loader',
         include: path.join(__dirname, '..')
       },
       {
@@ -48,5 +50,8 @@ module.exports = {
         query: {limit: 10240} 
       }
     ]
+  },
+  postcss: function() {
+    return [autoprefixer, cssnano];
   }
 };

@@ -10,10 +10,6 @@ export default class WorkoutTimer extends React.Component {
     super(props)
   }
 
-  componentWillReceiveProps(nextProps) {
-
-  }
-
   getWorkoutType(routine, workout) {
     if (routine.name === '5/3/1') {
       return _.keys(workout)[0].toUpperCase()

@@ -17,3 +17,10 @@ export const secondsToTime = function secondsToTime(seconds) {
 
   return timeString
 }
+
+export const dateToDay = function dateToDay(date) {
+  const dict = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+      'Friday', 'Saturday']
+
+  return dict[date.getDay()]
+}

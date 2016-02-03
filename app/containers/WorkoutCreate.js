@@ -52,7 +52,7 @@ export default class WorkoutCreate extends React.Component {
     return (
       <div className="workout-create-container">
         {guide.isWaiting || _.size(guide.lifts) < 1 ?
-          <Loader /> :
+          null :
           <WorkoutForm
             dispatch={dispatch}
             guide={guide}

@@ -1,0 +1,26 @@
+@import '../imports.scss';
+
+.history-list-component {
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  .history-list-title {
+    margin: 20px 0;
+    font-family: $font-family-bold;
+    text-align: center;
+    font-size: 22px;
+    height: 51px;
+    padding: 10px;
+  }
+  .month-title {
+    padding: 5px;
+    text-align: center;
+    background: $alert;
+    color: white;
+    border-bottom: 2px solid $light-grey;
+    border-top: 2px solid $light-grey;
+    font-weight: bold;
+    border-radius: 4px;
+  }
+}
