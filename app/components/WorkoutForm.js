@@ -58,11 +58,6 @@ export default class WorkoutForm extends React.Component {
       const liftName = _.keys(this.state.lifts)[0]
       let lifts = []
 
-      // this.state.lifts[liftName] = {
-      //   0: [180, 180],
-      //   1: [180, 180]
-      // }
-
       // todo: extract to util
       _.forEach(this.state.lifts[liftName], (set, setName) => {
         lifts.push({
@@ -79,12 +74,8 @@ export default class WorkoutForm extends React.Component {
         }
       }
 
-      // lifts = [
-      //   { name: 'deadlift', weight: [180] }
-      // ]
-
       dispatch(workoutActions.saveWorkout(options))
-      dispatch(routeActions.push('/workouts'))
+        .then(() => dispatch(routeActions.push('/workouts')))
 
       // todo: update user maxes if week 3!
 
