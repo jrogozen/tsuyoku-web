@@ -6,21 +6,31 @@
     padding: 0;
   }
   .history-list-title {
-    margin: 20px 0;
+    height: 51px;
     font-family: $font-family-bold;
     text-align: center;
     font-size: 22px;
-    height: 51px;
-    padding: 10px;
+    padding: 10px 0;
+    margin: 20px 0;
+    margin-top: 0;
+    @include breakpoint(md-and-up) {
+      text-align: left;
+    }
   }
   .month-title {
-    padding: 5px;
-    text-align: center;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+    text-align: left;
     background: $alert;
     color: white;
     border-bottom: 2px solid $light-grey;
     border-top: 2px solid $light-grey;
     font-weight: bold;
     border-radius: 4px;
+  }
+  .toggle {
+    float: right;
+    line-height: 20px;
+    cursor: pointer;
   }
 }

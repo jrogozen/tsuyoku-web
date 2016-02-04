@@ -3,19 +3,26 @@
 .history-widget-component {
   border-bottom: 2px solid $grey;
   margin-bottom: 2px;
-  padding: 20px 30px;
+  padding: 20px 10px;
   float: left;
   width: 100%;
-  // transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
   cursor: pointer;
-  // background: $alert;
   &.odd {
     background: $light-grey;
+    .history-widget-left {
+      border-right: 1px solid $grey;
+    }
+  }
+  &:hover {
+    color: $alert;
   }
   .history-widget-left {
     float: left;
     text-align: center;
-    margin-right: 40px;
+    width: 100px;
+    margin-right: 30px;
+    border-right: 1px solid $light-grey;
     .date-title {
       font-family: $font-family-bold;
       font-size: 22px;

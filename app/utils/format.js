@@ -1,3 +1,5 @@
+import numeral from 'numeral'
+
 export const capitalize = function capitalize(string) {
   const split = string.toLowerCase().split(' ')
   const capitalized = split.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -23,4 +25,8 @@ export const dateToDay = function dateToDay(date) {
       'Friday', 'Saturday']
 
   return dict[date.getDay()]
+}
+
+export const formatNumber = function formatNumber(num) {
+  return numeral(num).format('0.0a')
 }

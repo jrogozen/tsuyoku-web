@@ -21,7 +21,7 @@ export default function user(state = initialState, action = {}) {
       const user = Object.assign({}, state, {
         isWaiting: false,
         isAuthenticated: !error,
-        info: payload ? Object.assign({}, state.info, payload) : state.info
+        info: (payload  || error ) ? Object.assign({}, state.info, payload) : state.info
       })
 
       if (payload && payload.admin === false) {

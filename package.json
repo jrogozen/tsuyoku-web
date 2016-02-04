@@ -41,6 +41,7 @@
     "moment": "^2.11.1",
     "morgan": "^1.6.1",
     "node-sass": "^3.4.2",
+    "numeral": "^1.5.3",
     "postcss-loader": "^0.8.0",
     "promise": "^7.1.1",
     "raw-loader": "^0.5.1",

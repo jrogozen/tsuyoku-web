@@ -1,0 +1,31 @@
+@import '../imports.scss';
+
+.history-summary-component {
+  padding: 20px 10px;
+  padding-bottom: 0;
+  float: left;
+  width: 100%;
+  border-bottom: 2px solid $light-grey;
+  border-top: 2px solid $light-grey;
+  li {
+    margin-bottom: 20px;
+  }
+  .history-summary-item {
+    .history-summary-title {
+      font-size: 16px;
+      color: $dark-grey;
+    }
+    .history-summary-value {
+      font-size: 38px;
+      font-family: $font-family-bold;
+      transition: all 0.2s ease-in;
+      cursor: pointer;
+      &:hover {
+        color: $alert;
+      }
+      i {
+        font-size: 24px;
+      }
+    }
+  }
+}

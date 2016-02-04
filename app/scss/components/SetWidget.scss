@@ -18,6 +18,7 @@ li.set-widget-component {
     }
   }
   .inner-circle {
+    @include no-user-select();
     position: absolute;
     margin: auto;
     left: 0;

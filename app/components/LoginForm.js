@@ -14,6 +14,7 @@ export default class LoginForm extends React.Component {
     super(props)
 
     this.state = {
+      error: false,
       focusEmail: false,
       focusPassword: false
     }
@@ -28,6 +29,8 @@ export default class LoginForm extends React.Component {
     this.handleSubmit = (e) => {
       e.preventDefault()
 
+      this.setState( { error: false })
+
       const dispatch = this.props.dispatch
       const email = this.email.value
       const password = this.password.value
@@ -37,6 +40,11 @@ export default class LoginForm extends React.Component {
       }
 
       dispatch(userActions.fetchLogin({ email, password }))
+        .then(() => {
+          if (!this.props.isAuthenticated) {
+            this.setState({ error: true })
+          }
+        })
     }
   }
 
@@ -73,6 +81,11 @@ export default class LoginForm extends React.Component {
         <button className="alert" onClick={this.handleSubmit}>
           Login
         </button>
+        {this.state.error ?
+          <div className="error-message">
+            Error logging in, please try again.
+          </div> : null
+        }
         {user.isWaiting ?
           <Loader /> : null
         }

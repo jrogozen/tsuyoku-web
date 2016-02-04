@@ -30,6 +30,13 @@ a {
   }
 }
 
+div, button {
+  @include no-user-select();
+  &:focus {
+    outline: 0;
+  }
+}
+
 .button-group {
     clear: both;
     float: left;

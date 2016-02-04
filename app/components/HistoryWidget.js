@@ -57,7 +57,7 @@ export default class HistoryWidget extends React.Component {
                 <div className="lift-max">{liftSummary.max}lb</div>
                 <div className="lift-sets">
                   {liftSummary.lifts.map((set) => {
-                    return <span className="lift-set">{`${set.length} x ${set[0]}`}</span>
+                    return <span className="lift-set">{`${set.length} x ${set[0]} lb`}</span>
                   })}
                 </div>
               </div>

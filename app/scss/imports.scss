@@ -3,14 +3,15 @@ $dark: #2C3133;
 $grey: #D6D6D6;
 $mid-grey: #BABABA;
 $light-grey: #F5F5F5;
+$dark-grey: #5C5C5C;
 $alert: #ED6041;
 $warning: #FFC800;
 $success: #47C7B5;
 
-$font-family-bold: HelveticaNeue-CondensedBold, 'Helvetica Neue', 'Arial Narrow', Arial, sans-serif;
+$font-family-subtitle: Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
+$font-family-bold: HelveticaNeue-CondensedBold,'Helvetica Neue', 'Arial Narrow', Arial, sans-serif;
 $font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 
-/* breakpoints */
 $screen-sm-min: 320px;
 $screen-sm-max: 767px;
 $screen-md-min: 768px;
@@ -19,26 +20,31 @@ $screen-lg-min: 992px;
 $screen-lg-max: 1199px;
 $screen-xl-min: 1200px;
 
+@mixin no-user-select() {
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 @mixin breakpoint($size) {
-    @if ($size==sm-and-up) {
-        @content;
+  @if ($size==sm-and-up) {
+    @content;
+  }
+  @else if ($size==md-and-up) {
+    @media (min-width: $screen-md-min) {
+      @content;
     }
-    @else if ($size==md-and-up) {
-        @media (min-width: $screen-md-min) {
-            @content;
-        }
+  }
+  @else if ($size==lg-and-up) {
+    @media (min-width: $screen-lg-min) {
+      @content;
     }
-    @else if ($size==lg-and-up) {
-        @media (min-width: $screen-lg-min) {
-            @content;
-        }
+  }
+  @else if ($size==xl-and-up) {
+    @media (min-width: $screen-xl-min) {
+      @content;
     }
-    @else if ($size==xl-and-up) {
-        @media (min-width: $screen-xl-min) {
-            @content;
-        }
-    }
-    @else {
-        @warn "Breakpoint mixin supports: sm-and-up, md-and-up, lg-and-up, xl-and-up";
-    }
+  }
+  @else {
+    @warn "Breakpoint mixin supports: sm-and-up, md-and-up, lg-and-up, xl-and-up";
+  }
 }
