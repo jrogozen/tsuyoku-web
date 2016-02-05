@@ -1,0 +1,16 @@
+@import '../imports.scss';
+
+.dashboard-container {
+  .dashboard-title {
+      height: 51px;
+      font-family: $font-family-bold;
+      text-align: center;
+      font-size: 22px;
+      padding: 10px 0;
+      margin: 20px 0;
+      margin-top: 0;
+      @include breakpoint(md-and-up) {
+        text-align: left;
+      }
+  }
+}

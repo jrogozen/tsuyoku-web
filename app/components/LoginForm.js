@@ -20,7 +20,8 @@ export default class LoginForm extends React.Component {
     }
 
     this.handleFocusState = (target) => {
-      let state = Object.assign({}, this.state)
+      const state = Object.assign({}, this.state)
+
       state[target] = !state[target]
 
       this.setState(state)
