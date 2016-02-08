@@ -1,0 +1,23 @@
+@import '../imports.scss';
+
+.popup-modal-component {
+  border: 1px solid $grey;
+  border-radius: 10px;
+  padding: 40px;
+  position: absolute;
+  z-index: 2;
+  text-align: center;
+  background: white;
+  position: absolute;
+  top: 20%;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  width: 350px;
+  height: auto;
+  .skip {
+    font-size: 12px;
+    cursor: pointer;
+    color: $dark-grey;
+  }
+}

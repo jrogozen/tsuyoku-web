@@ -14,8 +14,10 @@
       border-right: 1px solid $grey;
     }
   }
-  &:hover {
+  &:focus {
+    @include no-user-select();
     color: $alert;
+    outline: 0;
   }
   .history-widget-left {
     float: left;

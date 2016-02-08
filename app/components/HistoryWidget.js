@@ -44,7 +44,7 @@ export default class HistoryWidget extends React.Component {
     const baseDate = new Date(workout.created_at)
 
     return (
-      <li key={workout.created_at} className={this.getCss()}>
+      <li tabIndex="0" key={workout.created_at} className={this.getCss()}>
         <div className="history-widget-left">
           <div className="date-title">{baseDate.getDate()}</div>
           <div className="day-title">{dateToDay(baseDate)}</div>

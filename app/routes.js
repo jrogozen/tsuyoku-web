@@ -15,9 +15,8 @@ export default function configRoutes(store) {
     const state = store.getState()
     const user = state.user
 
-    // todo: in react-router 2.0, you can pass a single object to replace :)
     if (!user.isAuthenticated) {
-      replace({ nextPathname: nextState.location.pathname }, '/login', nextState.location.query)
+      replace({ pathname: '/login', query: nextState.location.query })
     }
 
     callback()

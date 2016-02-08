@@ -1,0 +1,55 @@
+@import '../imports.scss';
+
+.input-text-component {
+  input {
+    border: 0;
+    background: none;
+    padding: 16px 0;
+    font-size: 18px;
+    outline: 0;
+    width: 100%;
+    position: relative;
+    tap-highlight-color: rgba(0,0,0,0);
+    touch-callout: none;
+    transform-origin: left;
+    &:focus {
+      color: $alert;
+    }
+  }
+  label {
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 8px 0;
+    position: relative;
+    text-align: left;
+    width: 100%;
+    float: left;
+    width: 100%;
+    color: black;
+    transition: color 0.5s;
+    &:before, &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      width: 100%;
+      height: 1px;
+    }
+    &:before {
+      background: rgba(0,0,0,.2);
+    }
+    &:after {
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1s;
+      background-color: $alert;;
+      height: 2px;
+    }
+    &.filled {
+      color: $alert;
+      &:after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

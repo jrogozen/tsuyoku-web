@@ -1,6 +1,8 @@
 @import '../imports.scss';
 
 .info-widget-component {
+  cursor: pointer;
+  position: relative;
   display: block;
   padding: 20px;
   text-align: center;
@@ -14,7 +16,15 @@
     
   }
   .value {
+    position: relative;
     font-family: $font-family-bold;
     font-size: 36px;
+  }
+  &:focus {
+    border: 2px solid $alert;
+    color: $alert;
+    .value {
+      // border-bottom: 2px solid $light-grey;
+    }
   }
 }

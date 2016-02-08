@@ -4,6 +4,7 @@ import { routeActions as route } from 'react-router-redux'
 import { Link } from 'react-router'
 
 import Loader from './Loader'
+import InputText from './InputText'
 
 import * as userActions from '../actions/user'
 
@@ -14,17 +15,7 @@ export default class LoginForm extends React.Component {
     super(props)
 
     this.state = {
-      error: false,
-      focusEmail: false,
-      focusPassword: false
-    }
-
-    this.handleFocusState = (target) => {
-      const state = Object.assign({}, this.state)
-
-      state[target] = !state[target]
-
-      this.setState(state)
+      error: false
     }
 
     this.handleSubmit = (e) => {
@@ -33,8 +24,8 @@ export default class LoginForm extends React.Component {
       this.setState( { error: false })
 
       const dispatch = this.props.dispatch
-      const email = this.email.value
-      const password = this.password.value
+      const email = this.refs.email.getValue()
+      const password = this.refs.password.getValue()
 
       if (!email || !password) {
         return
@@ -70,14 +61,14 @@ export default class LoginForm extends React.Component {
 
     return (
       <form className="login-form-component">
-        <div className="input-group">
-          <input onFocus={this.handleFocusState.bind(null, 'focusEmail')} onBlur={this.handleFocusState.bind(null, 'focusEmail')} ref={(ref) => this.email = ref} type="email" />
-          <label className={this.state.focusEmail ? 'filled' : ''}>email</label>
-        </div>
-        <div className="input-group">
-          <input onFocus={this.handleFocusState.bind(null, 'focusPassword')} onBlur={this.handleFocusState.bind(null, 'focusPassword')} ref={(ref) => this.password = ref} type="password" />
-          <label className={this.state.focusPassword ? 'filled' : ''}>password</label>
-        </div>
+        <InputText
+          ref="email"
+          type="email"
+          label="email" />
+        <InputText
+          ref="password"
+          type="password"
+          label="password" />
         <div className="button-group">
         <button className="alert" onClick={this.handleSubmit}>
           Login

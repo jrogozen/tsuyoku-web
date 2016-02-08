@@ -11,15 +11,26 @@ export default class InfoWidget extends React.Component {
     })
   }
 
-  // todo: click to change (update user info)
-
   render() {
     const { title, value, disabled } = this.props
 
+    if (disabled) {
+      return (
+        <div className={this.getCss()}>
+          <div className="title">{title}</div>
+          <div className="value">
+            {value ? value : '--'}
+          </div>
+        </div>
+      )
+    }
+
     return (
-      <div className={this.getCss()}>
+      <div tabIndex="0" className={this.getCss()}>
         <div className="title">{title}</div>
-        <div className="value">{value ? value : '--'}</div>
+        <div className="value">
+          {value ? value : '--'}
+        </div>
       </div>
     )
   }

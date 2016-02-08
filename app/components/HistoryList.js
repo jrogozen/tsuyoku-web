@@ -37,9 +37,9 @@ export default class HistoryList extends React.Component {
         {_.map(workoutHistory, (month) => {
           return (
             <div className="history-list-month">
-              <div className="month-title">
+              <div onClick={this.toggleHistoryDisplay} className="month-title">
                 {`${capitalize(month.month)}, ${new Date(month.workouts[0].created_at).getFullYear()}`}
-                <i onClick={this.toggleHistoryDisplay} className="toggle material-icons">code</i>
+                <i className="toggle material-icons">code</i>
               </div>
               <ul>
                 {this.state.historyDisplay === 'summary' ?

@@ -1,7 +1,8 @@
 import * as appActions from '../actions/app'
 
 export const initialState = {
-  isPending: true
+  isPending: true,
+  successPopup: false
 }
 
 export default function app(state = initialState, action = {}) {

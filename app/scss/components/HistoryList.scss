@@ -18,6 +18,7 @@
     }
   }
   .month-title {
+    cursor: pointer;
     padding: 5px 10px;
     margin-bottom: 20px;
     text-align: left;
@@ -31,6 +32,5 @@
   .toggle {
     float: right;
     line-height: 20px;
-    cursor: pointer;
   }
 }

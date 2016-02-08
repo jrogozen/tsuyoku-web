@@ -3,7 +3,8 @@ import * as userActions from '../actions/user'
 
 const _fetch = require('isomorphic-fetch')
 
-const API_URL = 'https://tsuyoku-api.herokuapp.com/'
+// const API_URL = 'https://tsuyoku-api.herokuapp.com/'
+const API_URL = 'http://localhost:1337/'
 
 const baseUser = { info: {} }
 

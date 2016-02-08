@@ -3,6 +3,7 @@ import React from 'react'
 
 import { getDate } from '../utils/time'
 import * as workoutActions from '../actions/workout'
+import * as appActions from '../actions/app'
 import { routeActions } from 'react-router-redux'
 
 import WorkoutTimer from './WorkoutTimer'
@@ -77,7 +78,9 @@ export default class WorkoutForm extends React.Component {
       dispatch(workoutActions.saveWorkout(options))
         .then(() => dispatch(routeActions.push('/workouts')))
 
-      // todo: update user maxes if week 3!
+        // todo: update user maxes if week 3!
+        .then(() => dispatch(appActions.setAppBool('successPopup', true)))
+
 
       // if (week % 3 === 0) {
         // dispatch(userActions)
@@ -123,9 +126,21 @@ export default class WorkoutForm extends React.Component {
     }, 1000)
   }
 
+  getWorkoutMax(workout, user) {
+    const dict = {
+      'press': 'press',
+      'deadlift': 'deadlift',
+      'squatt': 'squat',
+      'bench press': 'bench_press'
+    }
+
+    return user.info.maxes[_.keys(workout)[0]]
+  }
+
   render() {
     const  { guide, user, dispatch } = this.props
     const currentDate = new Date()
+    const max = this.getWorkoutMax(guide.lifts, user)
 
     return (  
       <div className="workout-form-component">
@@ -142,7 +157,9 @@ export default class WorkoutForm extends React.Component {
             {getDate()}
           </div>
           <div className="right">
-            <span className="user-weight" onClick={dispatch.bind(null, routeActions.push('/dashboard'))}>{user.info.weight ? user.info.weight : '--'} lb</span>
+            <span className="user-weight" onClick={dispatch.bind(null, routeActions.push('/dashboard'))}>
+              {max} lb
+            </span>
           </div>
         </div>
 

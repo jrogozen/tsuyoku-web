@@ -24,7 +24,9 @@ export default class WorkoutTimer extends React.Component {
     return (
       <div className="workout-timer-component">
         {display === 'info' ?
-          <div className="info">{capitalize(this.getWorkoutType(routine, workout))}</div> : null
+          <div className="info">
+            {capitalize(this.getWorkoutType(routine, workout))}
+          </div> : null
         }
         {display === 'timer' ?
           <div onClick={clearTimer} className="timer">TIMER - {secondsToTime(timer)}</div> : null

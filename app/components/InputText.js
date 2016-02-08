@@ -1,8 +1,12 @@
 import React from 'react'
 
+const stylesheet = require('../scss/components/InputText')
+
 export default class InputText extends React.Component {
   constructor(props) {
     super(props)
+
+    this.input = this.props.value
 
     this.state = {
       error: false,
@@ -27,12 +31,13 @@ export default class InputText extends React.Component {
 
   render() {
     return (
-      <div className="input-group">
+      <div className="input-text-component">
         <input
           onFocus={this.handleFocusState}
           onBlur={this.handleFocusState}
           ref={(ref) => this.input = ref}
-          type={this.props.ref} />
+          type={this.props.type} >
+        </input>
         <label className={this.state.focus ? 'filled' : ''}>{this.props.label}</label>
       </div>
     )
