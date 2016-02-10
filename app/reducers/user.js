@@ -21,7 +21,9 @@ export default function user(state = initialState, action = {}) {
       const user = Object.assign({}, state, {
         isWaiting: false,
         isAuthenticated: !error,
-        info: (payload  || error ) ? Object.assign({}, state.info, payload) : state.info
+
+        // todo: is this correct?
+        info: (payload || error ) ? Object.assign({}, state.info, payload) : Object.assign({}, state.info)
       })
 
       if (payload && payload.admin === false) {
@@ -33,6 +35,15 @@ export default function user(state = initialState, action = {}) {
       return user
     case userActions.REQUEST_LOGOUT:
       return initialState
+    case userActions.REQUEST_UPDATE:
+      return Object.assign({}, state, {
+        isWaiting: true
+      })
+    case userActions.RECEIVE_UPDATE:
+      return Object.assign({}, state, {
+        isWaiting: false,
+        info: error ? Object.assign({}, state.info) : Object.assign({}, state.info, payload)
+      })
     default:
       return state
   }

@@ -1,13 +1,14 @@
-import { expect } from 'chai'
 import { polyfill } from 'es6-promise';
-import fetch from 'isomorphic-fetch/fetch-npm-node';
-import nock from 'nock'
 
-import { mockLocalStorage } from '../utils'
+import {
+  expect,
+  fetch,
+  nock,
+  mockLocalStorage,
+  API_URL
+} from '../utils'
 
 import _fetch from '../../utils/fetch';
-
-const API_URL = 'https://tsuyoku-api.herokuapp.com/'
 
 describe('Fetch util', () => {
   const util = _fetch

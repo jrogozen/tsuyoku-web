@@ -56,7 +56,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <PopupModal isVisible={this.props.app.successPopup} id="workout-success">
+        <PopupModal closeModal={this.closeSuccessPopup} isVisible={this.props.app.successPopup} id="workout-success">
           <p>Swole! You've completed a workout cycle! Should we update your one rep maxes?</p>
           <div>
             <button className="success">Yea!</button>

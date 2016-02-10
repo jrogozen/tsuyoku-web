@@ -67,4 +67,31 @@ describe('User reducer', () => {
     )
     expect(reducer(base, action)).to.deep.eq(expectedState)
   })
+
+  it('sets state for REQUEST_UPDATE', () => {
+    const action = { type: userActions.REQUEST_UPDATE }
+    const expectedState = Object.assign({}, initialState, {
+      isWaiting: true
+    })
+    expect(reducer(undefined, action)).to.deep.eq(expectedState)
+  })
+
+  it('sets state for RECEIVE_UPDATE', () => {
+    const updatedInfo = { age: 300 }
+    const action = { type: userActions.RECEIVE_UPDATE, payload: updatedInfo }
+    const expectedState = Object.assign({}, initialState, {
+      isWaiting: false,
+      info: Object.assign({}, initialState.info, updatedInfo)
+    })
+    expect(reducer(undefined, action)).to.deep.eq(expectedState)
+  })
+
+  it('does not update user info state on error RECEIVE_UPDATE', () => {
+    const updatedInfo = new Error('NO!')
+    const action = { type: userActions.RECEIVE_UPDATE, payload: updatedInfo, error: true }
+    const expectedState = Object.assign({}, initialState, {
+      isWaiting: false
+    })
+    expect(reducer(undefined, action)).to.deep.eq(expectedState)
+  })
 })

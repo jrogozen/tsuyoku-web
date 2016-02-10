@@ -1,10 +1,7 @@
 import promise from 'promise'
 import * as userActions from '../actions/user'
-
+import { API_URL } from '../../config'
 const _fetch = require('isomorphic-fetch')
-
-// const API_URL = 'https://tsuyoku-api.herokuapp.com/'
-const API_URL = 'http://localhost:1337/'
 
 const baseUser = { info: {} }
 

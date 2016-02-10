@@ -5,6 +5,7 @@ import { polyfill } from 'es6-promise'
 import fetch from 'isomorphic-fetch/fetch-npm-node'
 import nock from 'nock'
 
+import { API_URL } from '../../config'
 import * as userActions from '../actions/user'
 import * as workoutActions from '../actions/workout'
 import * as guideActions from '../actions/guide'
@@ -12,8 +13,6 @@ import * as appActions from '../actions/app'
 import user from '../models/user'
 
 polyfill()
-
-const API_URL = 'https://tsuyoku-api.herokuapp.com/'
 
 const localStorage = function localStorage () {
   let storage = {}

@@ -53,6 +53,31 @@ describe('User actions', () => {
     expect(userActions.requestLogout()).to.deep.eq(expectedAction)
   })
 
+  it('creates REQUEST_UPDATE action', () => {
+    const expectedAction = { type: userActions.REQUEST_UPDATE }
+    expect(userActions.requestUpdate()).to.deep.eq(expectedAction)
+  })
+
+  it('creates RECEIVE_UPDATE action', () => {
+    const data = { age: 5, api_access_token: 'justdoit' }
+    const expectedAction = {
+      type: userActions.RECEIVE_UPDATE,
+      payload: data,
+      error: undefined
+    }
+    expect(userActions.receiveUpdate(null, data)).to.deep.eq(expectedAction)
+  })
+
+  it('handle RECEIVE_UPDATE error', () => {
+    const error = new Error('life is hard')
+    const expectedAction = {
+      type: userActions.RECEIVE_UPDATE,
+      payload: error,
+      error: true
+    }
+    expect(userActions.receiveUpdate(error)).to.deep.eq(expectedAction)
+  })
+
   describe('async user actions', () => {
     afterEach(() => {
       nock.cleanAll()
