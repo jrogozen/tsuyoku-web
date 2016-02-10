@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var StatsPlugin = require('stats-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
-var cssnano = require('cssnano');
+// var cssnano = require('cssnano');
 
 module.exports = {
   entry: [
@@ -61,6 +61,7 @@ module.exports = {
     ]
   },
   postcss: function() {
-    return [autoprefixer, cssnano];
+    return [autoprefixer];
+    // return [autoprefixer, cssnano];
   }
 };

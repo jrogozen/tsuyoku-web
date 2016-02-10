@@ -21,7 +21,7 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       __DEV__: true
-    })
+    }) 
   ],
   resolve: {
     root: path.resolve(__dirname, '..'),
