@@ -11,6 +11,33 @@ import * as userActions from '../actions/user'
 const stylesheet = require('../scss/containers/Dashboard')
 
 export default class Dashboard extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.saveHandler = (title, value) => {
+      const updateObj = {}
+      const user = this.props.user
+
+      switch (title) {
+        case 'overhead press':
+          updateObj.maxes = { press: Number(value) }
+          break
+        case 'deadlift':
+          updateObj.maxes = { deadlift: Number(value) }
+          break
+        case 'bench press':
+          updateObj.maxes = { 'bench_press': Number(value) }
+          break
+        case 'squat':
+          updateObj.maxes = { squat: Number(value) }
+          break
+        default:
+          updateObj[title] = Number(value)
+      }
+
+      this.props.dispatch(userActions.fetchUpdate({ user: user.info, data: updateObj }))
+    }
+  }
   render() {
     const { user, dispatch } = this.props
     const maxes = user.info.maxes
@@ -23,12 +50,12 @@ export default class Dashboard extends React.Component {
               <h2 className="dashboard-title">Dashboard</h2>
             </div>
             <div className="col-xs-12">
-              <InfoWidget title="weight" value={`${user.info.weight || '--'} lb`}/>
-              <InfoWidget title="body fat" value="-- %" disabled/>
-              <InfoWidget title="overhead press" value={`${maxes.press || '--'} lb`}/>
-              <InfoWidget title="deadlift" value={`${maxes.deadlift || '--'} lb`}/>
-              <InfoWidget title="bench press" value={`${maxes.bench_press || '--'} lb`}/>
-              <InfoWidget title="squat" value={`${maxes.squat || '--'} lb`}/>
+              <InfoWidget saveAction={this.saveHandler} title="weight" unit="lb" value={`${user.info.weight || '--'}`}/>
+              <InfoWidget title="body fat" unit="%" value="--" disabled/>
+              <InfoWidget saveAction={this.saveHandler} title="overhead press" unit="lb" value={`${maxes.press || '--'}`}/>
+              <InfoWidget saveAction={this.saveHandler} title="deadlift" unit="lb" value={`${maxes.deadlift || '--'}`}/>
+              <InfoWidget saveAction={this.saveHandler} title="bench press" unit="lb" value={`${maxes.bench_press || '--'}`}/>
+              <InfoWidget saveAction={this.saveHandler} title="squat" unit="lb" value={`${maxes.squat || '--'}`}/>
             </div>
           </div>
         </div>

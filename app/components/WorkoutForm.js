@@ -77,14 +77,11 @@ export default class WorkoutForm extends React.Component {
 
       dispatch(workoutActions.saveWorkout(options))
         .then(() => dispatch(routeActions.push('/workouts')))
-
-        // todo: update user maxes if week 3!
-        .then(() => dispatch(appActions.setAppBool('successPopup', true)))
-
-
-      // if (week % 3 === 0) {
-        // dispatch(userActions)
-      // }
+        .then(() => {
+          if (this.state.routine.week % 4 === 0) {
+            dispatch(appActions.setAppBool('successPopup', true))
+          }
+        })
     }
   }
 

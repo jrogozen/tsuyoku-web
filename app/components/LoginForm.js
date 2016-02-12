@@ -21,7 +21,7 @@ export default class LoginForm extends React.Component {
     this.handleSubmit = (e) => {
       e.preventDefault()
 
-      this.setState( { error: false })
+      this.setState({ error: false })
 
       const dispatch = this.props.dispatch
       const email = this.refs.email.getValue()
@@ -32,6 +32,27 @@ export default class LoginForm extends React.Component {
       }
 
       dispatch(userActions.fetchLogin({ email, password }))
+        .then(() => {
+          if (!this.props.isAuthenticated) {
+            this.setState({ error: true })
+          }
+        })
+    }
+
+    this.handleRegister = (e) => {
+      e.preventDefault()
+
+      this.setState({ error: false })
+
+      const dispatch = this.props.dispatch
+      const email = this.refs.email.getValue()
+      const password = this.refs.password.getValue()
+
+      if (!email || !password) {
+        return
+      }
+
+      dispatch(userActions.fetchSignUp({ email, password }))
         .then(() => {
           if (!this.props.isAuthenticated) {
             this.setState({ error: true })
@@ -70,9 +91,18 @@ export default class LoginForm extends React.Component {
           type="password"
           label="password" />
         <div className="button-group">
-        <button className="alert" onClick={this.handleSubmit}>
-          Login
-        </button>
+          <div className="row">
+            <div className="col-xs-6">
+              <button className="alert" onClick={this.handleSubmit}>
+                Login
+              </button>
+            </div>
+            <div className="col-xs-6">
+              <button className="alert" onClick={this.handleRegister}>
+                Register
+              </button>
+            </div>
+          </div>
         {this.state.error ?
           <div className="error-message">
             Error logging in, please try again.

@@ -79,11 +79,11 @@ export function saveWorkout(options = {}) {
       }
 
       dispatch(receiveWorkout(null, json.data))
-      dispatch(fetchWorkouts({
-        user,
-        routineName: workout.routine.name
-      }))
-      dispatch(guideActions.receiveGuide(guideReducer.initialState))
+      // dispatch(fetchWorkouts({
+      //   user,
+      //   routineName: workout.routine.name
+      // }))
+      // dispatch(guideActions.receiveGuide(guideReducer.initialState))
     }).catch(err => dispatch(receiveWorkout(err)))
   }
 }

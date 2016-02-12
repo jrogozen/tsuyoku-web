@@ -1,5 +1,5 @@
 import fetch from '../utils/fetch'
-import user from '../models/user'
+import User from '../models/user'
 
 import timeout from '../utils/timer'
 
@@ -71,7 +71,7 @@ export function fetchLogin(credentials) {
           throw json.error
         }
 
-        const parsedUser = user(json)
+        const parsedUser = User(json)
 
         dispatch(receiveLogin(null, parsedUser))
         return parsedUser
@@ -80,26 +80,52 @@ export function fetchLogin(credentials) {
   }
 }
 
-// export function fetchUpdate(options) {
-//   const { user, data } = options
+export function fetchUpdate(options) {
+  const { user, data } = options
 
-//   return (dispatch) => {
-//     dispatch(requestUpdate())
+  return (dispatch) => {
+    dispatch(requestUpdate())
 
-//     return fetch(user, dispatch, {
-//       method: 'put',
-//       endpoint: 'users',
-//       data
-//     })
-//       .then(json => {
-//         if (!json.success) {
-//           throw json.error
-//         }
-//       })
-//       .catch(err => dispatch(receiveLogin(err)))
-//   }
-// }
+    return fetch(user, dispatch, {
+      method: 'put',
+      endpoint: 'users/' + user._id,
+      data
+    })
+      .then(json => {
+        if (!json.success) {
+          throw json.error
+        }
+
+        const parsedUser = User(json)
+
+        dispatch(receiveUpdate(null, parsedUser))
+        return parsedUser
+      })
+      .catch(err => {
+        dispatch(receiveLogin(err))
+      })
+  }
+}
 
 export function fetchSignUp(credentials) {
+  return (dispatch) => {
+    dispatch(requestLogin())
 
+    return fetch(null, dispatch, {
+      method: 'post',
+      endpoint: 'users',
+      data: credentials
+    })
+      .then(json => {
+        if (!json.success) {
+          throw json.error
+        }
+
+        const parsedUser = User(json)
+
+        dispatch(receiveLogin(null, parsedUser))
+        return parsedUser
+      })
+      .catch(err => dispatch(receiveLogin(err)))
+  }
 }

@@ -111,5 +111,41 @@ describe('User actions', () => {
       const store = mockStore({ user: {} }, expectedActions, done)
       store.dispatch(userActions.fetchLogin())
     })
+
+    it('dispatches actions during fetchUpdate()', (done) => {
+      const userInfo = {
+        _id: 100,
+        email: 'mahalo@gmail.com'
+      }
+      const userData = {
+        age: 30
+      }
+      const token = 'mahalo'
+      const expected = {
+        _id: 100,
+        email: 'mahalo@gmail.com',
+        api_access_token: token,
+        age: 30
+      }
+
+      nock(API_URL)
+        .put('/users/100')
+        .reply(200, {
+          data: Object.assign({}, userInfo, userData),
+          api_access_token: token,
+          success: true
+        })
+
+        const expectedActions = [
+          { type: userActions.REQUEST_UPDATE },
+          { type: userActions.RECEIVE_UPDATE, payload: expected, error: undefined }
+        ]
+
+        const store = mockStore({ user: {} }, expectedActions, done)
+        store.dispatch(userActions.fetchUpdate({
+          user: userInfo,
+          data: userData
+        }))
+    })
   })
 })

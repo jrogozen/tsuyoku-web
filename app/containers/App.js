@@ -19,9 +19,31 @@ class App extends React.Component {
     super(props)
 
     this.closeSuccessPopup = () => {
-      const dispatch = this.props.dispatch
+      const { dispatch } = this.props
 
       dispatch(appActions.setAppBool('successPopup', false))
+    }
+
+    this.updateUserInfo = () => {
+      const { user, guide, dispatch } = this.props
+      const maxes = {}
+
+      _.forEach(guide.lifts, (lift, liftName) => {
+        if (user.info.maxes[liftName]) {
+          if (liftName === 'squat' || liftName === 'press') {
+            maxes[liftName] = user.info.maxes[liftName] + 5
+          } else {
+            maxes[liftName] = user.info.maxes[liftName] + 10
+          }
+        }
+      })
+
+      dispatch(userActions.fetchUpdate({
+        user: user.info,
+        data: { maxes }
+      }))
+
+      this.closeSuccessPopup()
     }
   }
 
@@ -56,13 +78,15 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <PopupModal closeModal={this.closeSuccessPopup} isVisible={this.props.app.successPopup} id="workout-success">
-          <p>Swole! You've completed a workout cycle! Should we update your one rep maxes?</p>
-          <div>
-            <button className="success">Yea!</button>
-            <span className="skip" onClick={this.closeSuccessPopup}>skip for now</span>
-          </div>
-        </PopupModal>
+        {this.props.app.successPopup ?
+          <PopupModal closeModal={this.closeSuccessPopup} id="workout-success">
+            <p>Swole! You've completed a workout cycle! Should we update your one rep maxes?</p>
+            <div>
+              <button onClick={this.updateUserInfo} className="success">Yea!</button>
+              <span className="skip" onClick={this.closeSuccessPopup}>skip for now</span>
+            </div>
+          </PopupModal> : null
+        }
         <div className={this.getCss()}>
           <div className="container">
             <div className="row">

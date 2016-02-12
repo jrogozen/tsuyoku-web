@@ -12,7 +12,7 @@ export default class Login extends React.Component {
       <div id="login-container" className="container">
         <div className="row">
           <div className="col-xs-12 col-sm-6 col-md-4">
-            <h2>Login to your account</h2>
+            <h2>Login or Register your account</h2>
             <LoginForm dispatch={dispatch} user={user} />
           </div>
         </div>

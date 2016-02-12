@@ -19,12 +19,23 @@
     position: relative;
     font-family: $font-family-bold;
     font-size: 36px;
-  }
-  &:focus {
-    border: 2px solid $alert;
-    color: $alert;
-    .value {
-      // border-bottom: 2px solid $light-grey;
+    &.editing {
+      color: $mid-grey;
+      input {
+        width: 60px;
+        text-align: left;
+        border: 0;
+        &:focus, &:active {
+          outline: 0;
+        }
+      }
     }
   }
+  // &:focus {
+  //   border: 2px solid $alert;
+  //   color: $alert;
+  //   .value {
+  //     // border-bottom: 2px solid $light-grey;
+  //   }
+  // }
 }

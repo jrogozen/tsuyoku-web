@@ -3,6 +3,8 @@ var webpack = require('webpack');
 var StatsPlugin = require('stats-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
+
+// todo: fix cssnano?
 // var cssnano = require('cssnano');
 
 module.exports = {

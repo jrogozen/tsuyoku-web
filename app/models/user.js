@@ -22,7 +22,6 @@ export default function(json) {
       Object.create(base),
       data
   )
-
-  mergedUser.api_access_token = api_access_token
+  mergedUser.api_access_token = api_access_token || mergedUser.api_access_token
   return mergedUser
 }

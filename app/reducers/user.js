@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import * as userActions from '../actions/user'
 import { base as userBase } from '../models/user'
 
@@ -42,7 +44,7 @@ export default function user(state = initialState, action = {}) {
     case userActions.RECEIVE_UPDATE:
       return Object.assign({}, state, {
         isWaiting: false,
-        info: error ? Object.assign({}, state.info) : Object.assign({}, state.info, payload)
+        info: error ? Object.assign({}, state.info) : _.merge({}, state.info, payload)
       })
     default:
       return state

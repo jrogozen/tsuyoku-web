@@ -28,13 +28,11 @@ export default class PopupModal extends React.Component {
   render() {
     const children = this.props.children
 
-    {return this.props.isVisible ?
-      (
-        <div id={this.props.id} className="popup-modal-component">
-          {children}
-        </div>
-      ) : null
-    }
+   return (
+      <div id={this.props.id} className="popup-modal-component">
+        {children}
+      </div>
+    )
   }
 }
 
