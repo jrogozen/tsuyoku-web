@@ -3,5 +3,5 @@ export const getOneRepMax = function getOneRepMax (reps, weight) {
     return false
   }
 
-  return Math.floor(weight * (36 / (37 - reps)))
+  return Math.ceil(weight * (36 / (37 - reps)))
 }
