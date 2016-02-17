@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { routeActions } from 'react-router-redux'
 
 import InfoWidget from '../components/InfoWidget'
+import MaxWidget from '../components/MaxWidget'
 import UserFrom from '../components/UserForm'
 
 import * as userActions from '../actions/user'
@@ -35,7 +36,7 @@ export default class Dashboard extends React.Component {
           updateObj[title] = Number(value)
       }
 
-      this.props.dispatch(userActions.fetchUpdate({ user: user.info, data: updateObj }))
+      return this.props.dispatch(userActions.fetchUpdate({ user: user.info, data: updateObj }))
     }
   }
   render() {
@@ -50,12 +51,35 @@ export default class Dashboard extends React.Component {
               <h2 className="dashboard-title">Dashboard</h2>
             </div>
             <div className="col-xs-12">
-              <InfoWidget saveAction={this.saveHandler} title="weight" unit="lb" value={`${user.info.weight || '--'}`}/>
-              <InfoWidget title="body fat" unit="%" value="--" disabled/>
-              <InfoWidget saveAction={this.saveHandler} title="overhead press" unit="lb" value={`${maxes.press || '--'}`}/>
-              <InfoWidget saveAction={this.saveHandler} title="deadlift" unit="lb" value={`${maxes.deadlift || '--'}`}/>
-              <InfoWidget saveAction={this.saveHandler} title="bench press" unit="lb" value={`${maxes.bench_press || '--'}`}/>
-              <InfoWidget saveAction={this.saveHandler} title="squat" unit="lb" value={`${maxes.squat || '--'}`}/>
+              <div className="dashboard-user-info">
+                <InfoWidget saveAction={this.saveHandler} title="weight" unit="lb" value={`${user.info.weight || '--'}`}/>
+                <InfoWidget title="body fat" unit="%" value="--" disabled/>
+              </div>
+            </div>
+            <div className="col-xs-12">
+              <div className="dashboard-maxes">
+                <h3>1RM</h3>
+                <MaxWidget
+                  currentMax={maxes.press}
+                  liftName="overhead press"
+                  saveAction={this.saveHandler}
+                />
+                <MaxWidget
+                  currentMax={maxes.deadlift}
+                  liftName="deadlift"
+                  saveAction={this.saveHandler}
+                />
+                <MaxWidget
+                  currentMax={maxes.bench_press}
+                  liftName="bench press"
+                  saveAction={this.saveHandler}
+                />
+                <MaxWidget
+                  currentMax={maxes.squat}
+                  liftName="squat"
+                  saveAction={this.saveHandler}
+                />
+              </div>
             </div>
           </div>
         </div>

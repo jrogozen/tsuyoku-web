@@ -1,9 +1,9 @@
 @import '../imports.scss';
 
 .info-widget-component {
-  cursor: pointer;
+  width: 150px;
   position: relative;
-  display: block;
+  display: inline-block;
   padding: 20px;
   text-align: center;
   border: 2px solid $light-grey;
@@ -22,20 +22,14 @@
     &.editing {
       color: $mid-grey;
       input {
-        width: 60px;
+        border-bottom: 1px solid $mid-grey;
+        display: inline-block;
         text-align: left;
-        border: 0;
+        // border: 0;
         &:focus, &:active {
           outline: 0;
         }
       }
     }
   }
-  // &:focus {
-  //   border: 2px solid $alert;
-  //   color: $alert;
-  //   .value {
-  //     // border-bottom: 2px solid $light-grey;
-  //   }
-  // }
 }

@@ -21,6 +21,7 @@ a {
   color: $alert;
   text-decoration: none;
   &:hover {
+    cursor: pointer;
     color: $warning;
     text-decoration: underline;
   }
@@ -49,6 +50,13 @@ div, button {
     border-radius: 10px;
     padding: 10px 15px;
     font-weight: bold;
+    &.inline {
+      font-weight: normal;
+      display: inline-block;
+      margin: 0 10px;
+      padding: 2px 10px;
+      border-radius: 5px;
+    }
   }
   .success {
     width: 100%;
@@ -58,6 +66,10 @@ div, button {
     &:hover {
       background: $success;
       color: white;
+    }
+    &.inline {
+      border: 1px solid $success;
+      width: auto;
     }
   }
   .warning {

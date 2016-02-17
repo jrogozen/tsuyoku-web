@@ -14,4 +14,18 @@
         text-align: left;
       }
   }
+  .dashboard-maxes {
+    margin: 40px 0;
+    text-align: center;
+    @include breakpoint(md-and-up) {
+      text-align: left;
+    }
+  }
+  .dashboard-user-info {
+    margin: 0 auto;
+    text-align: center;
+    @include breakpoint(md-and-up) {
+      text-align: left;
+    }
+  }
 }
