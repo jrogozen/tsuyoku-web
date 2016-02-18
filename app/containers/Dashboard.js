@@ -6,6 +6,7 @@ import { routeActions } from 'react-router-redux'
 import InfoWidget from '../components/InfoWidget'
 import MaxWidget from '../components/MaxWidget'
 import UserFrom from '../components/UserForm'
+import EmailAndAgeEditor from '../components/EmailAndAgeEditor'
 
 import * as userActions from '../actions/user'
 
@@ -48,7 +49,7 @@ export default class Dashboard extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <h2 className="dashboard-title">Dashboard</h2>
+              <EmailAndAgeEditor email={user.info.email} age={user.info.age} dispatch={dispatch} />
             </div>
             <div className="col-xs-12">
               <div className="dashboard-user-info">
@@ -58,7 +59,7 @@ export default class Dashboard extends React.Component {
             </div>
             <div className="col-xs-12">
               <div className="dashboard-maxes">
-                <h3>1RM</h3>
+                <h4>Base Weight (1RM)</h4>
                 <MaxWidget
                   currentMax={maxes.press}
                   liftName="overhead press"
@@ -79,6 +80,11 @@ export default class Dashboard extends React.Component {
                   liftName="squat"
                   saveAction={this.saveHandler}
                 />
+              </div>
+            </div>
+            <div className="col-xs-12">
+              <div className="dashboard-user-account-info">
+                
               </div>
             </div>
           </div>

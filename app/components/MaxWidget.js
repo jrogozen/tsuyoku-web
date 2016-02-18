@@ -19,6 +19,7 @@ export default class MaxWidget extends React.Component {
 
       this.setState({ error: false })
 
+      // todo: implement error display
       if (!this.reps.value || this.reps.value > 10 || !this.weight.value) {
         return this.setState({ error: 'Must enter valid rep and weight values.' })
       }

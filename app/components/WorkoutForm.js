@@ -155,7 +155,7 @@ export default class WorkoutForm extends React.Component {
           </div>
           <div className="right">
             <span className="user-weight" onClick={dispatch.bind(null, routeActions.push('/dashboard'))}>
-              {max} lb
+              based on 1RM of {max} lb
             </span>
           </div>
         </div>
