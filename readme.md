@@ -14,6 +14,5 @@ testy@gmail.com // 123456
 - server side rendering
 - more robust api fetcing test suite
 - test components
-- fix mobile chrome (react-router/history upgrade?)
 - add propTypes / defaultProps
 - add linter (js/scss)

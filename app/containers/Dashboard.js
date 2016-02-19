@@ -49,7 +49,7 @@ export default class Dashboard extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <EmailAndAgeEditor email={user.info.email} age={user.info.age} dispatch={dispatch} />
+              <EmailAndAgeEditor user={user} email={user.info.email} age={user.info.age} dispatch={dispatch} />
             </div>
             <div className="col-xs-12">
               <div className="dashboard-user-info">

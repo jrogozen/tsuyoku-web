@@ -81,6 +81,10 @@ div, button {
       background: $warning;
       color: white;
     }
+    &.inline {
+      border: 1px solid $warning;
+      width: auto;
+    }
   }
   .alert {
     width: 100%;
@@ -90,5 +94,9 @@ div, button {
     &:hover {
       background: $alert;
       color: white;
+    }
+    &.inline {
+      border: 1px solid $alert;
+      width: auto;
     }
   }
